@@ -13,7 +13,15 @@ namespace NeedForSpeed
         {
             this.HoursePower = hoursePower;
             this.Fuel = fuel;
-            this.FuelConsumption = fuelConsumption;
+            if (fuelConsumption == 0)
+            {
+                this.FuelConsumption = fuelConsumption;
+            }
+            else
+            {
+                this.FuelConsumption = defaultFuelConsumption;
+            }
+            
         }
 
         public int HoursePower { get; set; }

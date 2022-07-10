@@ -8,8 +8,9 @@ namespace NeedForSpeed
 {
     public class Car : Vehicle
     {
-        public Car(int hoursePower, double fuel, double fuelConsuption = 3)
-            : base(hoursePower, fuel, fuelConsuption)
+        private const double defaultFuelConsumption = 3;
+        public Car(int hoursePower, double fuel, double fuelConsuption)
+            : base(hoursePower, fuel, defaultFuelConsumption)
         {
         }
     }
