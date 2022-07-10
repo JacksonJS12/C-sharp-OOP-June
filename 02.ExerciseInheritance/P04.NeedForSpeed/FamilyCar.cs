@@ -8,8 +8,8 @@ namespace NeedForSpeed
 {
     public class FamilyCar : Car
     {
-        public FamilyCar(int hoursePower, double fuel, double fuelConsuption) 
-            : base(hoursePower, fuel, fuelConsuption)
+        public FamilyCar(int hoursePower, double fuel) 
+            : base(hoursePower, fuel)
         {
         }
     }

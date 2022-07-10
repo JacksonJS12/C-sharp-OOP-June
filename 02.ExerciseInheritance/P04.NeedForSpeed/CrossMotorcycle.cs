@@ -8,8 +8,8 @@ namespace NeedForSpeed
 {
     public class CrossMotorcycle : Motorcycle
     {
-        public CrossMotorcycle(int hoursePower, double fuel, double fuelConsumption) 
-            : base(hoursePower, fuel, fuelConsumption)
+        public CrossMotorcycle(int hoursePower, double fuel) 
+            : base(hoursePower, fuel)
         {
         }
     }
