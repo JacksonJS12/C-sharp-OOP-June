@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Restaurant
 {
-    public class Beverages : Product
+    public class Beverage : Product
     {
-        public Beverages(string name, decimal price, double milliliters) : base(name, price)
+        public Beverage(string name, decimal price, double milliliters) : base(name, price)
         {
             this.Milliliters = milliliters;
         }
