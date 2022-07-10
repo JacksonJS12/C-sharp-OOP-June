@@ -44,5 +44,9 @@ namespace Person
                 }
             }
         }
+        public override string ToString()
+        {
+            return $"Name: {this.Name}, Age: {this.Age}";
+        }
     }
 }
