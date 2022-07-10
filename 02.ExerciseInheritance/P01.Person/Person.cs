@@ -26,7 +26,7 @@ namespace Person
                 name = value;
             }
         }
-        public int Age
+        public virtual int Age
         {
             get
             {
