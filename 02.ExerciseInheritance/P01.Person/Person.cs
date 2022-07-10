@@ -26,7 +26,7 @@ namespace Person
                 name = value;
             }
         }
-        public virtual int Age
+        public int Age
         {
             get
             {
@@ -34,14 +34,7 @@ namespace Person
             }
             set
             {
-                if (value > 0)
-                {
-                    age = value;
-                }
-                else
-                {
-                    age = 0;
-                }
+                age = value;
             }
         }
         public override string ToString()
