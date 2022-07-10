@@ -41,7 +41,7 @@ namespace Animals
                     }
                     else if (animalType == "Kitten")
                     {
-                        animal = new Kittens(name, age);
+                        animal = new Kitten(name, age);
                         animals.Add(animal);
                     }
                     else if (animalType == "Tomcat")

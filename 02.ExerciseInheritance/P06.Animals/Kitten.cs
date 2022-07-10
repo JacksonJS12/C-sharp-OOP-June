@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Animals
 {
-    public class Kittens : Cat
+    public class Kitten : Cat
     {
         private const string gender = "Female";
-        public Kittens(string name, int age) 
+        public Kitten(string name, int age) 
             : base(name, age, gender)
         {
         }
