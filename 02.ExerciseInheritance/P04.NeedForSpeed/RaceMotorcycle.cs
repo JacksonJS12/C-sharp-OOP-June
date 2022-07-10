@@ -12,11 +12,13 @@ namespace NeedForSpeed
         public RaceMotorcycle(int hoursePower, double fuel)
             : base(hoursePower, fuel)
         {
+            this.FuelConsumption = defaultFuelConsumption;
         }
+
         public override double FuelConsumption
         {
             get => base.FuelConsumption;
-            set => base.FuelConsumption = defaultFuelConsumption;
+            set => base.FuelConsumption = value;
         }
     }
 }
