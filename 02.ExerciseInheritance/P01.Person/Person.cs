@@ -21,7 +21,7 @@ namespace Person
             {
                 return name;
             }
-            private set
+            set
             {
                 name = value;
             }
@@ -32,9 +32,16 @@ namespace Person
             {
                 return age;
             }
-            private set
+            set
             {
-                age = value;
+                if (value > 0)
+                {
+                    age = value;
+                }
+                else
+                {
+                    age = 0;
+                }
             }
         }
     }
