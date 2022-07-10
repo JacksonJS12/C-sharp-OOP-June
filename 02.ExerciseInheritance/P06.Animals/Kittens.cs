@@ -6,7 +6,8 @@ namespace Animals
 {
     public class Kittens : Cat
     {
-        public Kittens(string name, int age, string gender) 
+        private const string gender = "Female";
+        public Kittens(string name, int age) 
             : base(name, age, gender)
         {
         }
