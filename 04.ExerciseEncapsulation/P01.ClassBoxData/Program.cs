@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClassBoxData
+namespace P01.ClassBoxData
 {
     public class Program
     {
