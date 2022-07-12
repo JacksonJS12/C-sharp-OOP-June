@@ -1,20 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace P05.FootballTeamGenerator
 {
     public class Team
     {
-        public Team(int numberOfPlayers, string name, double rating)
+        private string name;
+        private readonly List<Player> players;
+        public Team( string name)
         {
-            this.NumberOfPlayers = numberOfPlayers;
+            this.players = new List<Player>();
             this.Name = name;
-            this.Rating = rating;
         }
+        public string Name 
+        { 
+            get
+            {
+                return this.Name;
+            }
+            private set
+            {
+                if(string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException(ErrorMessages.NullOrWhiteSpaceName);
+                }
+                this.name = value;
+            }
+        }
+        public void AddPlayer(Player player)
+        {
+            this.players.Add(player);
+        }
+        public void RemovePlayer(string playerName)
+        {
+            Player playerToDelete = this.players
+                .FirstOrDefault(p => p.Name == playerName);
 
-        public int NumberOfPlayers { get; private set; }
-        public string Name { get; private set; }
-        public double Rating { get; set; }
+            if (playerToDelete == null)
+            {
+                throw new InvalidOperationException(
+                    String.Format(ErrorMessages.PlayerNotInTeam, playerName, this.Name));
+            }
+
+            this.players.Remove(playerToDelete);
+        }
     }
 }
