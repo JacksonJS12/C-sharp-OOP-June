@@ -29,6 +29,8 @@ namespace P05.FootballTeamGenerator
                 this.name = value;
             }
         }
+        public int Rating
+            => (int)Math.Round(this.players.Average(player => player.Stats.GetOverallStack()), 0);
         public void AddPlayer(Player player)
         {
             this.players.Add(player);
