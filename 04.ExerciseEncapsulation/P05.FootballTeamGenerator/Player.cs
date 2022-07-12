@@ -24,7 +24,7 @@ namespace P05.FootballTeamGenerator
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException(ErrorMessages.NullOrWhiteSpaceName);
+                    throw new ArgumentException(ErrorMessages.NullOrWhitespaceName);
                 }
                 this.name = value;
             }

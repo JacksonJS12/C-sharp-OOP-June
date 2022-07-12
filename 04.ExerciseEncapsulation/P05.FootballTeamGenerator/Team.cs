@@ -8,37 +8,60 @@ namespace P05.FootballTeamGenerator
     public class Team
     {
         private string name;
+        //immutable, set only on initialization, after initialization you cannot change the reference
         private readonly List<Player> players;
-        public Team( string name)
+
+        private Team()
         {
             this.players = new List<Player>();
+        }
+
+        public Team(string name)
+            : this()
+        {
             this.Name = name;
         }
-        public string Name 
-        { 
+
+        public string Name
+        {
             get
             {
-                return this.Name;
+                return this.name;
             }
             private set
             {
-                if(string.IsNullOrWhiteSpace(value))
+                if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException(ErrorMessages.NullOrWhiteSpaceName);
+                    throw new ArgumentException(ErrorMessages.NullOrWhitespaceName);
                 }
+
                 this.name = value;
             }
         }
+
         public int Rating
-            => (int)Math.Round(this.players.Average(player => player.Stats.GetOverallStack()), 0);
+        {
+            get
+            {
+                if (this.players.Any())
+                {
+                    return (int)Math.Round(this.players.Average(p => p.Stats.GetOverallStat()), 0);
+                }
+
+                return 0;
+            }
+        }
+
         public void AddPlayer(Player player)
         {
             this.players.Add(player);
         }
+
         public void RemovePlayer(string playerName)
         {
             Player playerToDelete = this.players
                 .FirstOrDefault(p => p.Name == playerName);
+
 
             if (playerToDelete == null)
             {
@@ -47,6 +70,11 @@ namespace P05.FootballTeamGenerator
             }
 
             this.players.Remove(playerToDelete);
+        }
+
+        public override string ToString()
+        {
+            return $"{this.Name} - {this.Rating}";
         }
     }
 }
