@@ -8,33 +8,29 @@ namespace Shapes
 {
     public class Rectangle : IDrawable
     {
-        public double Width { get; private set; }
-        public double Height { get; private set; }
-
+        private int width;
+        private int height;
+        public int Width { get; set; }
+        public int Height { get; set; }
         public Rectangle(int width, int height)
         {
             this.Width = width;
             this.Height = height;
         }
-
         public void Draw()
         {
-            DrawLine(this.Width, '*', '*');
-            for (int i = 1; i < this.Height - 1; ++i)
-            {
-                DrawLine(this.Width, '*', ' ');
-            }
-            DrawLine(this.Width, '*', '*');
+            DrawLine(this.width, '*', '*');
+            for (int i = 1; i < this.height - 1; ++i)
+                DrawLine(this.width, '*', ' ');
+            DrawLine(this.width, '*', '*');
+        }
+        private void DrawLine(int width, char end, char mid)
+        {
+            Console.Write(end);
+            for (int i = 1; i < width - 1; ++i)
+                Console.Write(mid);
+            Console.WriteLine(end);
         }
 
-        private void DrawLine(double width, char end, char mid)
-        {
-            Console.WriteLine(end);
-            for (int i = 1; i < width - 1; ++i)
-            {
-                Console.WriteLine(mid);
-            }
-            Console.WriteLine(end);
-        }
     }
 }

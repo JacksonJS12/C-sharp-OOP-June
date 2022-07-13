@@ -6,33 +6,31 @@ using System.Threading.Tasks;
 
 namespace Shapes
 {
-    public class Circle : IDrawable
+    class Circle : IDrawable
     {
+        private int radius;
+        public int Radius { get { return radius; } set { radius = value; } }
         public Circle(int radius)
         {
             this.Radius = radius;
         }
-        public double Radius { get; private set; }
         public void Draw()
         {
-            double rIn = this.Radius - 0.4;
-            double rOut = this.Radius + 0.4;
-            for (double y = this.Radius; y >= -this.Radius; --y)
+            double rIn = this.radius - 0.4;
+            double rOut = this.radius + 0.4;
+            for (double y = this.radius; y >= -this.radius; --y)
             {
-                for (double x = -this.Radius; x < rOut; x += 0.5)
+                for (double x = -this.radius; x < rOut; x += 0.5)
                 {
                     double value = x * x + y * y;
                     if (value >= rIn * rIn && value <= rOut * rOut)
-                    {
-                        Console.WriteLine("*");
-                    }
+                        Console.Write("*");
                     else
-                    {
-                        Console.WriteLine(" ");
-                    }
+                        Console.Write(" ");
                 }
                 Console.WriteLine();
             }
         }
+
     }
 }
