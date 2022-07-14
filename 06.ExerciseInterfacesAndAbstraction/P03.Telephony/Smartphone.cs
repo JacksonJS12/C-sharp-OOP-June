@@ -5,7 +5,7 @@ using Telephony.Interfaces;
 
 namespace Telephony
 {
-    public class Smartphone : ISmartphone
+    public class Smartphone : IBrowseable
     {
         public void Browsing()
         {

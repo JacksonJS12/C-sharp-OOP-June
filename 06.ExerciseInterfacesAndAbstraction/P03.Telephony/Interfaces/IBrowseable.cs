@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Telephony.Interfaces
 {
-    public interface ISmartphone
+    public interface IBrowseable
     {
-        public void Calling();
-        public void Browsing();
+        public void Browsing(string url);
     }
 }
