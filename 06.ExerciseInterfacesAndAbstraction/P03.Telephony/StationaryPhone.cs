@@ -7,9 +7,9 @@ namespace Telephony
 {
     public class StationaryPhone : ICallable
     {
-        public void Call()
+        public string Call(string number)
         {
-            throw new NotImplementedException();
+            return $"Dialing... {number}";
         }
     }
 }
