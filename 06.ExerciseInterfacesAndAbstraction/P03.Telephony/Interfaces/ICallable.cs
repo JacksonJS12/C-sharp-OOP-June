@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Telephony.Interfaces
 {
-    public interface IStationary
+    public interface ICallable
     {
-        public void Call();
+        public void Call(string number);
     }
 }

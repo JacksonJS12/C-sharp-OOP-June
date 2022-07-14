@@ -5,7 +5,7 @@ using Telephony.Interfaces;
 
 namespace Telephony
 {
-    public class StationaryPhone : IStationary
+    public class StationaryPhone : ICallable
     {
         public void Call()
         {
