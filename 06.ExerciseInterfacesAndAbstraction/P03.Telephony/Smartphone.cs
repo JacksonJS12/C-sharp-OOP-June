@@ -5,16 +5,16 @@ using Telephony.Interfaces;
 
 namespace Telephony
 {
-    public class Smartphone : IBrowseable
+    public class Smartphone : ICallable, IBrowseable
     {
-        public void Browsing()
+        public string BrowseUrl(string url)
         {
-            throw new NotImplementedException();
+            return $"Browsing: {url}!";
         }
 
-        public void Calling()
+        public string Call(string number)
         {
-            throw new NotImplementedException();
+            return $"Calling... {number}";
         }
     }
 }
