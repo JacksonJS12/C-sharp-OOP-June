@@ -4,9 +4,9 @@ using System.Text;
 
 namespace P04.WildFarm
 {
-    public class Vegetable : Food
+    public class Meat : Food
     {
-        public Vegetable(int quantity) 
+        public Meat(int quantity) 
             : base(quantity)
         {
         }
