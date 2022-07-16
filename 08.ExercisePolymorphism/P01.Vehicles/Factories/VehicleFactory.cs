@@ -1,14 +1,13 @@
-﻿namespace Vehicle.Factories
+﻿namespace P01.Vehicles.Factories
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using Vehicle.Models;
-    using Vehicle.Models.Interfaces;
+
+    using Interfaces;
+    using Models;
+
     public class VehicleFactory : IVehicleFactory
     {
-        public Models.Interfaces.Vehicle CreateVehicle(string vehicleType, 
-            double fuelQuantity, double fuelConsumption)
+        public Vehicle CreateVehicle(string vehicleType, double fuelQuantity, double fuelConsumption)
         {
             Vehicle vehicle;
 
@@ -24,6 +23,7 @@
             {
                 throw new InvalidOperationException("Invalid vehicle type!");
             }
+
             return vehicle;
         }
     }

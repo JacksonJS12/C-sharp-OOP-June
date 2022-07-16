@@ -1,15 +1,24 @@
-﻿namespace Vehicle.Models.Interfaces
+﻿namespace P01.Vehicles.Models
 {
+    using Interfaces;
 
     public abstract class Vehicle : IVehicle
     {
         private double fuelQuantity;
         private double fuelConsumption;
-        protected Vehicle(double fuelQuantity, double fuelConsuption)
+
+        private Vehicle()
+        {
+            this.FuelConsumptionModifier = 0;
+        }
+
+        protected Vehicle(double fuelQuantity, double fuelConsumption)
+            : this()
         {
             this.FuelQuantity = fuelQuantity;
-            this.FuelConsumption = fuelConsuption;
+            this.FuelConsumption = fuelConsumption;
         }
+
         public double FuelQuantity
         {
             get
@@ -21,9 +30,8 @@
                 this.fuelQuantity = value;
             }
         }
-        public abstract double FuelConsumptionIncrement { get; }
 
-        public virtual double FuelConsumption
+        public double FuelConsumption
         {
             get
             {
@@ -31,30 +39,32 @@
             }
             protected set
             {
-                this.fuelConsumption = value;
+                this.fuelConsumption = value + this.FuelConsumptionModifier;
             }
         }
 
-        public string Drive(double disctance)
-        {
-            double fuelNeeded = disctance * this.FuelConsumption;
+        protected virtual double FuelConsumptionModifier { get; }
 
-            if (fuelNeeded >= this.FuelQuantity)
+        public string Drive(double distance)
+        {
+            double fuelNeeded = distance * this.FuelConsumption;
+            if (fuelNeeded > this.FuelQuantity)
             {
                 return $"{this.GetType().Name} needs refueling";
             }
+
             this.FuelQuantity -= fuelNeeded;
-            return $"{this.GetType().Name} travelled {disctance} km";
+            return $"{this.GetType().Name} travelled {distance} km";
         }
 
         public virtual void Refuel(double liters)
         {
-            this.fuelQuantity += liters;
+            this.FuelQuantity += liters;
         }
+
         public override string ToString()
         {
             return $"{this.GetType().Name}: {this.FuelQuantity:f2}";
         }
-
     }
 }

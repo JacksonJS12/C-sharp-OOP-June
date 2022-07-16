@@ -1,8 +1,9 @@
-﻿namespace Vehicle.Factories
+﻿namespace P01.Vehicles.Factories.Interfaces
 {
-    using Vehicle.Models.Interfaces;
+    using Models;
+
     public interface IVehicleFactory
     {
-        public Vehicle CreateVehicle(string vehicleTyep, double fuelQuantity, double fuelConsumption);
+        Vehicle CreateVehicle(string vehicleType, double fuelQuantity, double fuelConsumption);
     }
 }
