@@ -1,33 +1,22 @@
-﻿namespace Vehicle.Models
+﻿namespace P01.Vehicles.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using Interfaces;
     public class Truck : Vehicle
     {
-        public Truck(double fuelQuantity, double fuelConsuption)
-            : base(fuelQuantity, fuelConsuption)
+        private const double TruckFuelConsumptionIncrement = 1.6;
+        private const double RefuelCoeffiecient = 0.95;
+
+        public Truck(double fuelQuantity, double fuelConsumption)
+            : base(fuelQuantity, fuelConsumption)
         {
+
         }
 
-        public override double FuelConsumption 
-        {
-            get
-            {
-                return base.FuelConsumption;
-            }
-            protected set
-            {
-                this.FuelConsumption = value + this.FuelConsumptionIncrement;
-            }
-        }
+        protected override double FuelConsumptionModifier
+            => TruckFuelConsumptionIncrement;
 
-        public override double FuelConsumptionIncrement
-            => 1.6;
         public override void Refuel(double liters)
         {
-            base.Refuel(liters * 0.95);
+            base.Refuel(liters * RefuelCoeffiecient);
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Vehicle.Core
+﻿namespace P01.Vehicles.Core
 {
     public interface IEngine
     {

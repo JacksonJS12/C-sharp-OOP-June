@@ -1,11 +1,13 @@
 ﻿namespace P01.Vehicles
 {
     using System;
-    using Vehicle.Core;
-    using Vehicle.Factories;
-    using Vehicle.Models;
-    using Vehicle.Models.Interfaces;
-    internal class StartUp
+
+    using Core;
+    using Factories;
+    using Factories.Interfaces;
+    using Models;
+
+    public class StartUp
     {
         static void Main(string[] args)
         {
@@ -14,14 +16,14 @@
             string[] truckData = Console.ReadLine()
                 .Split();
 
-            IVehicleFactory vehicleFacoty = new VehicleFactory();
-            Vehicle car = vehicleFacoty
+            IVehicleFactory vehicleFactory = new VehicleFactory();
+            Vehicle car = vehicleFactory
                 .CreateVehicle(carData[0], double.Parse(carData[1]), double.Parse(carData[2]));
-            Vehicle truck = vehicleFacoty
-                .CreateVehicle(carData[0], double.Parse(carData[1]), double.Parse(carData[2]));
+            Vehicle truck = vehicleFactory
+                .CreateVehicle(truckData[0], double.Parse(truckData[1]), double.Parse(truckData[2]));
 
             IEngine engine = new Engine(car, truck);
-            engine.Start();
+            engine.Start(); 
         }
     }
 }
