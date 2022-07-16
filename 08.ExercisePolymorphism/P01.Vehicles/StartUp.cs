@@ -5,7 +5,7 @@
     using Vehicle.Factories;
     using Vehicle.Models;
     using Vehicle.Models.Interfaces;
-    internal class StartUp
+    public class StartUp
     {
         static void Main(string[] args)
         {
