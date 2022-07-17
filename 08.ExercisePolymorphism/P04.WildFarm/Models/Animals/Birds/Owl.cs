@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace P04.WildFar
+namespace P04.WildFarm
 {
     public class Owl : Bird
     {

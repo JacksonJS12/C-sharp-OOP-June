@@ -4,8 +4,8 @@ using System.Text;
 
 namespace P04.WildFarm
 {
-    public interface IEngine
+    public interface IFoodFactory
     {
-        public void Start();
+        Food CreateFood(string type, int quantity);
     }
 }

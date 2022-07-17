@@ -6,7 +6,11 @@ namespace P04.WildFarm
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IFoodFactory foodFactory = new FoodFactory();
+            IAnimalFactory animalFactory = new AnimalFactory();
+
+            Engine engine = new Engine(foodFactory, animalFactory);
+            engine.Start();
         }
     }
 }
