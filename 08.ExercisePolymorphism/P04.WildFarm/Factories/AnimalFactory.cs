@@ -21,7 +21,11 @@
             } 
             else if (type == "Tiger")
             {
-                animal = new Cat(name, weight, thirdParam, forthParam);
+                animal = new Tiger(name, weight, thirdParam, forthParam);
+            }
+            else if (type == "Dog")
+            {
+                animal = new Dog(name, weight, thirdParam);
             }
             else
             {

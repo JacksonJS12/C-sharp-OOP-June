@@ -13,15 +13,15 @@ namespace P04.WildFarm
             this.Weight = weight;
         }
 
-        public string Name { get; set; }
+        public string Name { get;}
         public double Weight { get; private set; }
         public int FoodEaten{ get; private set; }
-        protected abstract IReadOnlyCollection<Type> PrefferdFoods { get; }
+        protected abstract IReadOnlyCollection<Type> PreferredFoods { get; }
         protected abstract double WeightMultiplier { get; }
         public abstract string ProduceSound();
-        public virtual void Eat(Food food)
+        public void Eat(Food food)
         {
-            if (!this.PrefferdFoods.Contains(food.GetType()))
+            if (!this.PreferredFoods.Contains(food.GetType()))
             {
                 throw new FoodNotPreferredException
                     (string.Format(ExceptionMessages.FoodNotPreffered,

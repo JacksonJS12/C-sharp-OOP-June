@@ -22,13 +22,13 @@ namespace P04.WildFarm
         }
         public void Start()
         {
-            try
+            string cmd;
+            while ((cmd = Console.ReadLine()) != "End")
             {
-                string cmd;
-                while ((cmd = Console.ReadLine()) != "End")
+                try
                 {
                     string[] animalArgs = cmd
-                        .Split();
+                   .Split();
                     string[] foodArgs = Console.ReadLine()
                         .Split();
 
@@ -41,23 +41,23 @@ namespace P04.WildFarm
 
                     animal.Eat(food);
                 }
-                foreach (Animal animal in animals)
+                catch (InvalidFactoryTypeException ifte)
                 {
-                    Console.WriteLine(animal);
+                    Console.WriteLine(ifte.Message);
                 }
-            }
+                catch (FoodNotPreferredException fnpe)
+                {
+                    Console.WriteLine(fnpe.Message);
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    Console.WriteLine(ioe.Message);
+                }
 
-            catch (InvalidFactoryTypeException ifte)
-            {
-                Console.WriteLine(ifte.Message);
             }
-            catch (FoodNotPreferredException fnpe)
+            foreach (Animal animal in animals)
             {
-                Console.WriteLine(fnpe.Message);
-            } 
-            catch (InvalidOperationException ioe)
-            {
-                Console.WriteLine(ioe.Message);
+                Console.WriteLine(animal);
             }
         }
 
@@ -79,7 +79,7 @@ namespace P04.WildFarm
                 double weight = double.Parse(animalArgs[2]);
                 string thirdParam = animalArgs[3];
                 string forthParam = animalArgs[4];
-                animal = this.animalFactory.CreateAnimal(animalType, animaName, weight, thirdParam);
+                animal = this.animalFactory.CreateAnimal(animalType, animaName, weight, thirdParam, forthParam);
             }
             else
             {

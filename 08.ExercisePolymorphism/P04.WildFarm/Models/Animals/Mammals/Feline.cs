@@ -6,15 +6,17 @@ namespace P04.WildFarm
 {
     public abstract class Feline : Mammal
     {
-        protected Feline(string name, double weight, string livingRegion, string bread)
+        protected Feline(string name, double weight, string livingRegion, string breed )
             : base(name, weight, livingRegion)
         {
-            this.Bread = bread;
+            this.Breed = breed;
+
         }
-        public  string Bread { get; }
+        public string Breed { get; }
         public override string ToString()
         {
-            return base.ToString() + $"{this.Bread}, {this.Weight}, {this.LivingRegion}, {this.FoodEaten}]";
+            return base.ToString()
+                + $"{this.Breed}, {this.Weight}, {this.LivingRegion}, {this.FoodEaten}]";
         }
     }
 }

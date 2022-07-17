@@ -12,7 +12,7 @@ namespace P04.WildFarm
         {
         }
 
-        protected override IReadOnlyCollection<Type> PrefferdFoods 
+        protected override IReadOnlyCollection<Type> PreferredFoods 
             => new List<Type> { typeof(Meat) }.AsReadOnly();
 
         protected override double WeightMultiplier 
