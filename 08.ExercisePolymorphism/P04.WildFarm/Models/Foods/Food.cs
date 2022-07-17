@@ -6,6 +6,7 @@
         {
             this.Quantity = quantity;
         }
+
         public int Quantity { get; }
     }
 }

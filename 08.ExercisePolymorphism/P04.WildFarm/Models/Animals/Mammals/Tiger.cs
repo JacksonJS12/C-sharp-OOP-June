@@ -1,15 +1,15 @@
-﻿using P04.WildFarm;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace P04.WildFarm
 {
-    public class Owl : Bird
+    public class Tiger : Feline
     {
-        private const double OwlWeightMultiplier = 0.25;
+        private const double TigerWeightMultiplier = 1;
 
-        public Owl(string name, double weight, double wingSize)
-            : base(name, weight, wingSize)
+        public Tiger(string name, double weight, string livingRegion, string breed)
+            : base(name, weight, livingRegion, breed)
         {
 
         }
@@ -18,11 +18,11 @@ namespace P04.WildFarm
             => new List<Type> { typeof(Meat) }.AsReadOnly();
 
         protected override double WeightMultiplier
-            => OwlWeightMultiplier;
+            => TigerWeightMultiplier;
 
         public override string ProduceSound()
         {
-            return "Hoot Hoot";
+            return "ROAR!!!";
         }
     }
 }
