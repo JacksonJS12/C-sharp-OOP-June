@@ -25,10 +25,11 @@ namespace P04.WildFarm
             {
                 food = new Seeds(quantity);
             }
-            else 
-            { 
-                throw new InvalidFactoryTypeException(); 
+            else
+            {
+                throw new InvalidFactoryTypeException();
             }
+
             return food;
         }
     }

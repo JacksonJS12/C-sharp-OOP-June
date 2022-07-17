@@ -4,8 +4,8 @@ using System.Text;
 
 namespace P04.WildFarm
 {
-    public class ExceptionMessages
+    public static class ExceptionMessages
     {
-        public const string FoodNotPreffered = "{0} does not eat {1}!";
+        public const string FoodNotPreferred = "{0} does not eat {1}!";
     }
 }

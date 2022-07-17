@@ -13,6 +13,7 @@ namespace P04.WildFarm
         {
 
         }
+
         public InvalidFactoryTypeException(string message)
             : base(message)
         {
@@ -20,3 +21,4 @@ namespace P04.WildFarm
         }
     }
 }
+

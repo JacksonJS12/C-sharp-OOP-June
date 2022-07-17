@@ -6,7 +6,9 @@ namespace P04.WildFarm
 {
     public class Engine : IEngine
     {
+        //TODO: Implement IO Interface
         private readonly ICollection<Animal> animals;
+
         private readonly IFoodFactory foodFactory;
         private readonly IAnimalFactory animalFactory;
 
@@ -14,21 +16,23 @@ namespace P04.WildFarm
         {
             this.animals = new List<Animal>();
         }
+
         public Engine(IFoodFactory foodFactory, IAnimalFactory animalFactory)
             : this()
         {
-            this.animalFactory = animalFactory;
             this.foodFactory = foodFactory;
+            this.animalFactory = animalFactory;
         }
+
         public void Start()
         {
-            string cmd;
-            while ((cmd = Console.ReadLine()) != "End")
+            string command;
+            while ((command = Console.ReadLine()) != "End")
             {
                 try
                 {
-                    string[] animalArgs = cmd
-                   .Split();
+                    string[] animalArgs = command
+                        .Split();
                     string[] foodArgs = Console.ReadLine()
                         .Split();
 
@@ -53,8 +57,8 @@ namespace P04.WildFarm
                 {
                     Console.WriteLine(ioe.Message);
                 }
-
             }
+
             foreach (Animal animal in animals)
             {
                 Console.WriteLine(animal);
@@ -67,24 +71,27 @@ namespace P04.WildFarm
             if (animalArgs.Length == 4)
             {
                 string animalType = animalArgs[0];
-                string animaName = animalArgs[1];
+                string animalName = animalArgs[1];
                 double weight = double.Parse(animalArgs[2]);
                 string thirdParam = animalArgs[3];
-                animal = this.animalFactory.CreateAnimal(animalType, animaName, weight, thirdParam);
+
+                animal = this.animalFactory.CreateAnimal(animalType, animalName, weight, thirdParam);
             }
             else if (animalArgs.Length == 5)
             {
                 string animalType = animalArgs[0];
-                string animaName = animalArgs[1];
+                string animalName = animalArgs[1];
                 double weight = double.Parse(animalArgs[2]);
                 string thirdParam = animalArgs[3];
-                string forthParam = animalArgs[4];
-                animal = this.animalFactory.CreateAnimal(animalType, animaName, weight, thirdParam, forthParam);
+                string fourthParam = animalArgs[4];
+
+                animal = this.animalFactory.CreateAnimal(animalType, animalName, weight, thirdParam, fourthParam);
             }
             else
             {
                 throw new ArgumentException("Invalid input!");
             }
+
             return animal;
         }
     }

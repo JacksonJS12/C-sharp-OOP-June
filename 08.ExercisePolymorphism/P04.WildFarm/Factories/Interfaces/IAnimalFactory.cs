@@ -6,8 +6,6 @@ namespace P04.WildFarm
 {
     public interface IAnimalFactory
     {
-        public Animal CreateAnimal
-            (string type, string name, double weight,
-            string thirdParam, string forthParam = null);
+        Animal CreateAnimal(string type, string name, double weight, string thirdParam, string fourthParam = null);
     }
 }

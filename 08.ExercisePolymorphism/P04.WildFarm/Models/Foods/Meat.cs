@@ -6,9 +6,10 @@ namespace P04.WildFarm
 {
     public class Meat : Food
     {
-        public Meat(int quantity) 
+        public Meat(int quantity)
             : base(quantity)
         {
+
         }
     }
 }
