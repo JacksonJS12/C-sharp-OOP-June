@@ -1,8 +1,12 @@
-﻿=namespace P04.WildFarm
+﻿namespace P04.WildFarm
 {
-    
-    public abstract Mammal : Animal
+    public abstract class Mammal : Animal
     {
-
+        protected Mammal(string name, double weight, string livingRegion) 
+            : base(name, weight)
+        {
+            this.LivingRegion = livingRegion;
+        }
+        public string LivingRegion { get; }
     }
 }
