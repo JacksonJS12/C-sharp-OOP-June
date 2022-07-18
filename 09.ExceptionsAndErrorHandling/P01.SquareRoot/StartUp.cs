@@ -6,7 +6,26 @@ namespace P01.SquareRoot
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                int number = int.Parse(Console.ReadLine());
+
+                if (number < 0)
+                {
+                    throw new ArgumentException("Invalid number.");
+                }
+                double squareRoot = Math.Sqrt(number);
+                Console.WriteLine(squareRoot);
+
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Goodbye.");
+            }
         }
     }
 }
