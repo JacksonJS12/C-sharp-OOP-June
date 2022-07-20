@@ -1,6 +1,6 @@
 ﻿namespace P01.Stream_Progress
 {
-    public class File
+    public class File : IResult
     {
         private string name;
 
