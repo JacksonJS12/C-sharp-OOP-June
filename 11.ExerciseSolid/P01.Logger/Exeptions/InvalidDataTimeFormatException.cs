@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace P01.Logger
+namespace SoftUniLogger
 {
     public class InvalidDataTimeFormatException : Exception
     {
