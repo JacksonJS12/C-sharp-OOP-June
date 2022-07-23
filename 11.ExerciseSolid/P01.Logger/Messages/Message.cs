@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
+﻿namespace SoftUniLogger
+{
+    using System;
+    using System.ComponentModel.DataAnnotations;
 
-namespace SoftUniLogger
-{ 
     public class Message : IMessage
     {
         private const string EmptyLogTimeMessage = "Argument cannot be null or empty string!";
@@ -52,7 +51,7 @@ namespace SoftUniLogger
         }
         public ReportLevel Level { get; }
         private bool IsValidDataTime(string text)
-            => DataType.TryParse(text, out DateTime date);
+            => DateTime.TryParse(text, out DateTime date);
 
         
     }
