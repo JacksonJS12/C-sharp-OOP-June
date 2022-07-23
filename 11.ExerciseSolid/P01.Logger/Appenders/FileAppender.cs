@@ -1,6 +1,6 @@
 ﻿namespace SoftUniLogger.Appenders
 {
-    public class FileAppender : IAppender, IFileAppender
+    public class FileAppender : IFileAppender
     {
         private readonly IFormatter formatter;
         private FileAppender()
