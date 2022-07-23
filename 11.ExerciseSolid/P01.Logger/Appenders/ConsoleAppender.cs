@@ -8,9 +8,12 @@ namespace SoftUniLogger
 {
     public class ConsoleAppender : IAppender
     {
+        private readonly IFormatter formatter;
         public ConsoleAppender()
         {
             this.Count = 0;
+
+            this.formatter = new MessageFormatter(this.Layout);
         }
 
         public ConsoleAppender(ILayout layout)
@@ -25,16 +28,11 @@ namespace SoftUniLogger
 
         public void Append(IMessage message)
         {
-            string formattedMessage = this.FormatMessage(message);
+            string formattedMessage = this.formatter.FormatMessage(message);
+
             Console.WriteLine(formattedMessage);
+            this.Count++;
         }
-        private string FormatMessage(IMessage message) 
-            => string.Format(
-                this.Layout.Format, 
-                message.LogTime, 
-                message.Level.ToString(),
-                message.MessageText
-                );
         
     }
 }
