@@ -20,42 +20,50 @@
 
         public void AddAppender(IAppender appender)
         {
-            throw new System.NotImplementedException();
+            this.appenders.Add(appender);
         }
-
-        public void Clear()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Crirical(string logTime, string message, ReportLevel level)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Error(string logTime, string message, ReportLevel level)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Fatal(string logTime, string message, ReportLevel level)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Info(string logTime, string message, ReportLevel level)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public bool RemoveAppender(IAppender appender)
         {
-            throw new System.NotImplementedException();
+            return this.appenders.Remove(appender);
+        }
+        public void Clear()
+        {
+            this.appenders.Clear();
         }
 
-        public void Warning(string logTime, string message, ReportLevel level)
+
+        public void Info(string logTime, string message)
         {
-            throw new System.NotImplementedException();
+            LogMessage(logTime, message, ReportLevel.Info);
+        }
+
+        public void Warning(string logTime, string message)
+        {
+            LogMessage(logTime, message, ReportLevel.Warning);
+        }
+
+        public void Error(string logTime, string message)
+        {
+            LogMessage(logTime, message, ReportLevel.Error);
+        }
+
+        public void Crirical(string logTime, string message)
+        {
+            LogMessage(logTime, message, ReportLevel.Critical);
+        }
+
+        public void Fatal(string logTime, string message)
+        {
+            LogMessage(logTime, message, ReportLevel.Fatal);
+        }
+
+        private void LogMessage(string logTime, string messageText, ReportLevel level)
+        {
+            IMessage message = new Message(logTime, messageText, level);
+            foreach (IAppender appender in this.Appenders)
+            {
+                appender.Append(message);
+            }
         }
     }
 }

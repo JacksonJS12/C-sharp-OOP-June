@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     public static class Extensions
     {
-        public static void AddRange(this ICollection<IAppender> appenders, IEnumerable<IAppender> appendersToAdd)
+        public static void AddRange<T>(this ICollection<T> appenders, IEnumerable<T> appendersToAdd)
         {
-            foreach (IAppender apToAdd in appendersToAdd)
+            foreach (T apToAdd in appendersToAdd)
             {
                 appenders.Add(apToAdd);
             }
