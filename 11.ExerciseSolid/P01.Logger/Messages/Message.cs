@@ -6,24 +6,34 @@
     public class Message : IMessage
     {
         private const string EmptyLogTimeMessage = "Argument cannot be null or empty string!";
+
         private string logTime;
         private string messageText;
 
+        private readonly IValidator dateTimeValidator;
+
+        public Message()
+        {
+            this.dateTimeValidator = new DateTimeValidator();
+        }
+
         public Message(string logTime, string messageText, ReportLevel level)
+            : this()
         {
             this.LogTime = logTime;
             this.MessageText = messageText;
             this.Level = level;
         }
 
-        public string LogTime { 
+        public string LogTime
+        {
             get
             {
                 return this.logTime;
             }
             private set
             {
-                if (!IsValidDataTime(value))
+                if (!this.dateTimeValidator.IsValid(value))
                 {
                     throw new InvalidDataTimeFormatException();
                 }
@@ -34,7 +44,7 @@
                 this.logTime = value;
             }
         }
-        public string MessageText 
+        public string MessageText
         {
             get
             {
@@ -50,9 +60,5 @@
             }
         }
         public ReportLevel Level { get; }
-        private bool IsValidDataTime(string text)
-            => DateTime.TryParse(text, out DateTime date);
-
-        
     }
 }
