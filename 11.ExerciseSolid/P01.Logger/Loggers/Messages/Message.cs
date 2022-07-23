@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
-namespace P01.Logger
+namespace SoftUniLogger
 { 
     public class Message : IMessage
     {
