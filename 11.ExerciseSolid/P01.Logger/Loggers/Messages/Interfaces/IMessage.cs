@@ -8,7 +8,7 @@ namespace P01.Logger
 {
     public interface IMessage
     {
-        string DateTime { get; }
+        string LogTime { get; }
         string MessageText { get; }
         ReportLevel Level { get; }
     }

@@ -1,20 +1,58 @@
-﻿namespace P01.Logger
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+
+namespace P01.Logger
 { 
     public class Message : IMessage
     {
-        private string dateTime;
+        private const string EmptyLogTimeMessage = "Argument cannot be null or empty string!";
+        private string logTime;
         private string messageText;
 
-        public Message(string dateTime, string messageText, ReportLevel level)
+        public Message(string logTime, string messageText, ReportLevel level)
         {
-            this.DateTime = dateTime;
+            this.LogTime = logTime;
             this.MessageText = messageText;
             this.Level = level;
         }
 
-        public string DateTime { get; }
-        public string MessageText { get; }
+        public string LogTime { 
+            get
+            {
+                return this.logTime;
+            }
+            private set
+            {
+                if (!IsValidDataTime(value))
+                {
+                    throw new InvalidDataTimeFormatException();
+                }
+                else if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException(nameof(LogTime), EmptyLogTimeMessage);
+                }
+                this.logTime = value;
+            }
+        }
+        public string MessageText 
+        {
+            get
+            {
+                return this.messageText;
+            }
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException(nameof(this.LogTime), EmptyLogTimeMessage);
+                }
+                this.messageText = value;
+            }
+        }
         public ReportLevel Level { get; }
+        private bool IsValidDataTime(string text)
+            => DataType.TryParse(text, out DateTime date);
 
         
     }
