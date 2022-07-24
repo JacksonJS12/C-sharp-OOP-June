@@ -10,6 +10,7 @@ namespace SoftUniLogger
     {
         int Count { get; }
         ILayout Layout { get; }
+        ReportLevel Level { get; }
         void Append(IMessage message);
     }
 }

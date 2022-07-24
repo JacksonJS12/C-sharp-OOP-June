@@ -1,30 +1,39 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
+﻿namespace SoftUniLogger
+{
+    using System;
+    using System.ComponentModel.DataAnnotations;
 
-namespace SoftUniLogger
-{ 
     public class Message : IMessage
     {
         private const string EmptyLogTimeMessage = "Argument cannot be null or empty string!";
+
         private string logTime;
         private string messageText;
 
+        private readonly IValidator dateTimeValidator;
+
+        public Message()
+        {
+            this.dateTimeValidator = new DateTimeValidator();
+        }
+
         public Message(string logTime, string messageText, ReportLevel level)
+            : this()
         {
             this.LogTime = logTime;
             this.MessageText = messageText;
             this.Level = level;
         }
 
-        public string LogTime { 
+        public string LogTime
+        {
             get
             {
                 return this.logTime;
             }
             private set
             {
-                if (!IsValidDataTime(value))
+                if (!this.dateTimeValidator.IsValid(value))
                 {
                     throw new InvalidDataTimeFormatException();
                 }
@@ -35,7 +44,7 @@ namespace SoftUniLogger
                 this.logTime = value;
             }
         }
-        public string MessageText 
+        public string MessageText
         {
             get
             {
@@ -51,9 +60,5 @@ namespace SoftUniLogger
             }
         }
         public ReportLevel Level { get; }
-        private bool IsValidDataTime(string text)
-            => DataType.TryParse(text, out DateTime date);
-
-        
     }
 }

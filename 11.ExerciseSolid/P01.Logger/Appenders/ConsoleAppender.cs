@@ -16,15 +16,18 @@ namespace SoftUniLogger
             this.formatter = new MessageFormatter(this.Layout);
         }
 
-        public ConsoleAppender(ILayout layout)
+        public ConsoleAppender(ILayout layout, ReportLevel level)
             : this()
         {
             this.Layout = layout;
+            this.Level = level;
         }
 
         public int Count { get; private set; }
 
     public ILayout Layout { get; }
+
+        public ReportLevel Level { get; }
 
         public void Append(IMessage message)
         {
