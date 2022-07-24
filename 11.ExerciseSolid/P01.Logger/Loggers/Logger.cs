@@ -79,7 +79,10 @@
             IMessage message = new Message(logTime, messageText, level);
             foreach (IAppender appender in this.Appenders)
             {
-                appender.Append(message);
+                if (appender.Level <= level)
+                {
+                    appender.Append(message);
+                }
             }
         }
     }
