@@ -3,7 +3,7 @@
     using System.Collections.Generic;
 
 
-    partial interface ILogger
+    public interface ILogger
     {
         void Info(string logTime, string message);
         void Warning(string logTime, string message);

@@ -16,7 +16,7 @@ namespace SoftUniLogger
         public ILayout Layout { get; }
 
         public string FormatMessage(IMessage message)
-            => String.Format(this.Layout.Format,
+           => String.Format(this.Layout.Format,
                 message.LogTime, message.Level.ToString(), message.MessageText);
     }
 }
