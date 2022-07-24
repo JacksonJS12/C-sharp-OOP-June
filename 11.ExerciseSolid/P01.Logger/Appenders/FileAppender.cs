@@ -1,4 +1,4 @@
-﻿namespace SoftUniLogger.Appenders
+﻿namespace SoftUniLogger
 {
     public class FileAppender : IFileAppender
     {

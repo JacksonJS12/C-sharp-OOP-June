@@ -56,7 +56,17 @@
         {
             LogMessage(logTime, message, ReportLevel.Fatal);
         }
-
+        public void SaveLogs(string fileName)
+        {
+            int cnt = 1;
+            foreach (IAppender appender in this.Appenders)
+            {
+                if (appender is IFileAppender fileAppender)
+                {
+                   fileAppender.SaveLogFile($"{fileName}_{cnt++}.txt");
+                }
+            }
+        }
         private void LogMessage(string logTime, string messageText, ReportLevel level)
         {
             IMessage message = new Message(logTime, messageText, level);

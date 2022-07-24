@@ -10,5 +10,6 @@
         void Error(string logTime, string message);
         void Crirical(string logTime, string message);
         void Fatal(string logTime, string message);
+        void SaveLogs(string massage);
     }
 }

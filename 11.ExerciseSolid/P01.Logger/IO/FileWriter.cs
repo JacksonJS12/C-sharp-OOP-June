@@ -3,7 +3,7 @@
     using System.IO;
     using System.Text;
 
-    partial class FileWriter : IFileWriter
+    public class FileWriter : IFileWriter
     {
         public FileWriter(string filePath)
         {
@@ -14,7 +14,10 @@
         public void WriteContent(string content, string fileName)
         {
             string outputPath = Path.Combine(this.FilePath, fileName);
-
+            if (!Directory.Exists(outputPath))
+            {
+                Directory.CreateDirectory(outputPath);
+            }
             File.WriteAllText(outputPath, content, Encoding.UTF8);
         }
     }

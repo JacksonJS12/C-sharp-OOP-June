@@ -8,11 +8,18 @@
     {
         static void Main(string[] args)
         {
-            IMessage message = new Message("3/26/2015 2:08:11 PM", "Error occurred!" ,ReportLevel.Error); //hard coded message
-
             ILayout simpleLayout = new SimpleLayout();
+
             IAppender consoleAppender = new ConsoleAppender(simpleLayout);
-            consoleAppender.Append(message);
+
+            IFileWriter fw = new FileWriter("../../../Logs/");
+            ILogFile file = new LogFile(fw);
+            IFileAppender fileAppender = new FileAppender(simpleLayout, file);
+
+            var logger = new Logger(consoleAppender, fileAppender);
+            logger.Error("3/26/2015 2:08:11 PM", "Error parsing JSON.");
+            logger.Info("3/26/2015 2:08:11 PM", "User Pesho successfully registered.");
+            logger.SaveLogs("log");
         }
     }
 }
