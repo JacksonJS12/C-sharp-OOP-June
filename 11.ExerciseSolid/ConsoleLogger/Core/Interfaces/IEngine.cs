@@ -1,8 +1,7 @@
-﻿namespace SoftUniLogger
+﻿namespace ConsoleLogger.Core.Interfaces
 {
-    internal class IEngine
+    internal interface IEngine
     {
-       // void Star();
-
+        void Start();
     }
 }
