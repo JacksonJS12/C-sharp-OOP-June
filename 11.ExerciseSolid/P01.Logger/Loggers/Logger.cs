@@ -63,7 +63,14 @@
             {
                 if (appender is IFileAppender fileAppender)
                 {
-                   fileAppender.SaveLogFile($"{fileName}_{cnt++}.txt");
+                    if (fileAppender.Layout.GetType() == typeof(XmlLayout))
+                    {
+                        fileAppender.SaveLogFile($"{fileName}_{cnt++}.xml");
+                    }
+                    else
+                    {
+                        fileAppender.SaveLogFile($"{fileName}_{cnt++}.txt");
+                    }
                 }
             }
         }
