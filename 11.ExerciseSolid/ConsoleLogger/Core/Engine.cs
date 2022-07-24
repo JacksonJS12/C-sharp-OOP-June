@@ -85,7 +85,7 @@
                         this.logger.Critical(time, message);
                     }
                     else if (reportLevel == "FATAL")
-                    {
+                    { 
                         this.logger.Fatal(time, message);
                     }
                 }
