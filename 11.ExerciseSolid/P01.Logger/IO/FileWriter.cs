@@ -13,11 +13,12 @@
 
         public void WriteContent(string content, string fileName)
         {
-            string outputPath = Path.Combine(this.FilePath, fileName);
-            if (!Directory.Exists(outputPath))
+            if (!Directory.Exists(this.FilePath))
             {
-                Directory.CreateDirectory(outputPath);
+                Directory.CreateDirectory(this.FilePath);
             }
+            string outputPath = Path.Combine(this.FilePath, fileName);
+           
             File.WriteAllText(outputPath, content, Encoding.UTF8);
         }
     }
