@@ -2,6 +2,7 @@
 {
     internal class IEngine
     {
-        void Star();
+       // void Star();
+
     }
 }
