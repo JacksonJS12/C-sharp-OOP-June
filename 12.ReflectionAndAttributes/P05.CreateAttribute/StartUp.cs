@@ -2,11 +2,14 @@
 
 namespace AuthorProblem
 {
-    public class StartUp
+    [Author("Victor")]
+    class StartUp
     {
+        [Author("George")]
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
         }
     }
+
 }
