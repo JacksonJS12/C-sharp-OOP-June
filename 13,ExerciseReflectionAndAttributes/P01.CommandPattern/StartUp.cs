@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CommandPattern.Core.Contracts;
+using P01.CommandPattern.Core;
+using P01.CommandPattern.IO;
+using P01.CommandPattern.IO.Contracts;
+using System;
 
 namespace CommandPattern
 {
@@ -6,9 +10,12 @@ namespace CommandPattern
     {
         public static void Main(string[] args)
         {
-            //ICommandInterpreter command = new CommandInterpreter();
-            //IEngine engine = new Engine(command);
-            //engine.Run();
+            IReader reader = new ConsoleReader();
+            IWriter writer = new ConsoleWriter();
+
+            ICommandInterpreter command = new CommandInterpreter();
+            IEngine engine = new Engine(command, writer, reader);
+            engine.Run();
         }
     }
 }
