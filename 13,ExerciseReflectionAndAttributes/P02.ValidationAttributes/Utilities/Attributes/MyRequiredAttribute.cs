@@ -11,9 +11,8 @@ namespace ValidationAttributes.Utilities.Attributes
         {
             if (obj is string str)
             {
-                return string.IsNullOrEmpty(str);
+                return !string.IsNullOrEmpty(str);
             }
-
-            return obj == null;        }
+            return obj != null;        }
     }
 }
