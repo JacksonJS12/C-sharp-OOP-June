@@ -6,7 +6,7 @@ namespace P01._FakeAxeAndDummy
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
