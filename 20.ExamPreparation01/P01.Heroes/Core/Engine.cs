@@ -4,7 +4,6 @@
     using Heroes.IO;
     using Heroes.IO.Contracts;
     using Heroes.Core.Contracts;
-    using P01.Heroes.Core;
 
     public class Engine : IEngine
     {
