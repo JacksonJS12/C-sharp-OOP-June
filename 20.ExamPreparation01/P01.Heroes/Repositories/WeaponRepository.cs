@@ -2,40 +2,37 @@
 using Heroes.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace P01.Heroes.Repositories
 {
     public class WeaponRepository : IRepository<IWeapon>
     {
-        private readonly Dictionary<string, IWeapon> weapons;
+        private readonly List<IWeapon> weapons;
 
         public WeaponRepository()
         {
-            this.weapons = new Dictionary<string, IWeapon>();
+            this.weapons = new List<IWeapon>();
         }
         public IReadOnlyCollection<IWeapon> Models 
-            => this.weapons.Values;
+            => this.weapons.AsReadOnly();
 
         public void Add(IWeapon model)
-            => this.weapons.Add(model.Name, model);
+            => this.weapons.Add(model);
 
         public bool Remove(IWeapon model)
         {
-            if (this.weapons.ContainsKey(model.Name))
+            if (this.weapons.Any(w => w.Name == model.Name))
             {
-                this.weapons.Remove(model.Name);
+                this.weapons.Remove(model);
                 return true;
             }
             return false;
         }
         public IWeapon FindByName(string name)
         {
-            if (this.weapons.ContainsKey(name))
-            {
-                return this.weapons[name];
-            }
-            return null;
+            return this.weapons.FirstOrDefault(w => w.Name == name);
         }
     }
 }

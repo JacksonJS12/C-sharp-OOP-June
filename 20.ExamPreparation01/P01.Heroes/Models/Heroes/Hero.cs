@@ -60,10 +60,7 @@ namespace P01.Heroes.Models.Heroes
 
         public IWeapon Weapon
         {
-            get
-            {
-                return this.weapon;
-            }
+            get => this.weapon;
             private set
             {
                 if (value == null)
@@ -84,11 +81,16 @@ namespace P01.Heroes.Models.Heroes
         {
             var armourLeft = this.Armour - points;
 
-            if (armourLeft < 0)
+            if (armourLeft >= 0)
+            {
+                this.Armour = armourLeft;
+            }
+            else
             {
                 this.Armour = 0;
+                var damage = -armourLeft;
+                var healthLeft = this.Health - damage;
 
-                var healthLeft = this.Health + armourLeft;
                 if (healthLeft < 0)
                 {
                     this.Health = 0;
@@ -97,10 +99,6 @@ namespace P01.Heroes.Models.Heroes
                 {
                     this.Health = healthLeft;
                 }
-            }
-            else
-            {
-                this.Armour = armourLeft;
             }
 
         }

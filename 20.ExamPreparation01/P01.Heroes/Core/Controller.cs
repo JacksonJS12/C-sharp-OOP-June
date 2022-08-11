@@ -95,7 +95,8 @@ namespace P01.Heroes.Core
         {
             var map = new Map();
 
-            var heroesReadyForBattle = this.heroes
+            var heroesReadyForBattle = 
+                this.heroes
                 .Models
                 .Where(h => h.IsAlive && h.Weapon != null)
                 .ToList();
@@ -112,7 +113,7 @@ namespace P01.Heroes.Core
                 .Models
                 .OrderBy(h => h.GetType().Name)
                 .ThenBy(h => h.Name);
-
+             
             foreach (var hero in sprtedHeroes)
             {
                 result.AppendLine(hero.ToString());

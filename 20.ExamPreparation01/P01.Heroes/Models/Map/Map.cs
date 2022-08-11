@@ -74,18 +74,18 @@ namespace P01.Heroes.Models.Map
                     }
                 }
 
+                if (allKnightsAreDead)
+                {
+                    var deathKnights = knights.Count - aliveKnights;
+                    return $"The knights took {deathKnights} casualties but won the battle.";
+                }
                 if (allBarberiansAreDead)
                 {
                     var deathBarbarians = barbarians.Count - aliveBarberians;
                     return $"The barbarians took {deathBarbarians} casualties but won the battle.";
                 }
-                else if (allKnightsAreDead)
-                {
-                    var deathKnights = knights.Count - aliveKnights;
-                    return $"The knights took {deathKnights} casualties but won the battle.";
-                }
             }
-            throw new InvalidOperationException("The fight logic has a bug"); 
+            throw new InvalidOperationException("The fight logic has a bug");
         }
     }
 }
