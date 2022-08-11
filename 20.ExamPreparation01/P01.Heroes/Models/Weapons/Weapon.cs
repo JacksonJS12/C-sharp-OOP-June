@@ -15,7 +15,7 @@ namespace P01.Heroes.Models.Weapons
         {
             this.Name = name;
             this.Durability = durability;
-            this.Damge = damage;
+            this.Damage = damage;
         }
 
         public string Name
@@ -46,7 +46,7 @@ namespace P01.Heroes.Models.Weapons
                 this.durability = value;
             }
         }
-        private int Damge
+        private int Damage
         {
             get => this.damage;
             set
@@ -62,12 +62,14 @@ namespace P01.Heroes.Models.Weapons
 
         public int DoDamage()
         {
-            this.Durability--;
-            if (this.Damge == 0)
+            if (this.Durability == 0)
             {
                 return 0;
             }
-            return this.damage;
+
+            this.Durability--;
+
+            return this.Damage;
         }
 
     }

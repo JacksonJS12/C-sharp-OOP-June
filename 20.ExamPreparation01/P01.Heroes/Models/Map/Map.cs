@@ -8,7 +8,7 @@ using System.Text;
 
 namespace P01.Heroes.Models.Map
 {
-    public abstract class Map : IMap
+    public class Map : IMap
     {
         public string Fight(ICollection<IHero> players)
         {
@@ -67,9 +67,9 @@ namespace P01.Heroes.Models.Map
 
                         foreach (var knight in knights.Where(kn => kn.IsAlive))
                         {
-                            var weopenDamage = barbarian.Weapon.DoDamage();
+                            var weapenDamage = barbarian.Weapon.DoDamage();
 
-                            knight.TakeDamage(weopenDamage);
+                            knight.TakeDamage(weapenDamage);
                         }
                     }
                 }

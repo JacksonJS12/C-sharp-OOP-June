@@ -43,7 +43,7 @@ namespace P01.Heroes.Core
                 ? $"Sir {hero.Name}"
                 : $"{nameof(Barbarian)} {hero.Name}";
 
-            return $"Successfully added Sir {heroAlias} to the collection.";
+            return $"Successfully added {heroAlias} to the collection.";
         }
         public string CreateWeapon(string type, string name, int durability)
         {
@@ -64,9 +64,9 @@ namespace P01.Heroes.Core
 
         }
         public string AddWeaponToHero(string weaponName, string heroName)
-        {
+        { 
             var hero = this.heroes.FindByName(heroName);
-            var weapon = (this.weapens.FindByName(heroName);
+            var weapon = this.weapens.FindByName(weaponName);
             if (hero == null)
             {
                 throw new InvalidOperationException($"Hero {heroName} does not exist.");
@@ -86,7 +86,7 @@ namespace P01.Heroes.Core
 
             var weaponType = weapon.GetType().Name;
 
-            return $"Hero {heroName} can participate in battle using a {weaponType}.";
+            return $"Hero {heroName} can participate in battle using a {weaponType.ToLower()}.";
 
         }
 
@@ -111,12 +111,14 @@ namespace P01.Heroes.Core
             var sprtedHeroes = this.heroes
                 .Models
                 .OrderBy(h => h.GetType().Name)
-                .ThenByDescending(h => h.Name);
+                .ThenBy(h => h.Name);
 
             foreach (var hero in sprtedHeroes)
             {
                 result.AppendLine(hero.ToString());
             }
+
+            return result.ToString().Trim();
         }
 
     }
