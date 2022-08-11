@@ -60,7 +60,10 @@ namespace P01.Heroes.Models.Heroes
 
         public IWeapon Weapon
         {
-            get => this.Weapon;
+            get
+            {
+                return this.weapon;
+            }
             private set
             {
                 if (value == null)
@@ -106,9 +109,11 @@ namespace P01.Heroes.Models.Heroes
             var result = new StringBuilder();
 
             result.AppendLine($"{this.GetType().Name}: {this.Name}");
-            result.AppendLine("--Health: { hero health }");
-            result.AppendLine("--Armour: { hero armour }");
-            result.AppendLine("--Weapon: { weapon name }/Unarmed");
-        }}
+            result.AppendLine($"--Health: {this.Health}");
+            result.AppendLine($"--Armour: {this.Armour}");
+            result.Append($"--Weapon: {(this.Weapon == null ? "Unarmed" : this.Weapon.Name)}");
+
+            return result.ToString();
+        }
     }
 }
