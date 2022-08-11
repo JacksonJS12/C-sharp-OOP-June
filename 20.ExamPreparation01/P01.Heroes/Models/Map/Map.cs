@@ -12,80 +12,58 @@ namespace P01.Heroes.Models.Map
     {
         public string Fight(ICollection<IHero> players)
         {
-            var knights = new List<Knight>();
-            var barbarians = new List<Barbarian>();
+            var knights = new List<IHero>();
+            var barbarians = new List<IHero>();
 
-            foreach (var player in players)
+            foreach (var hero in players)
             {
-                if (player.IsAlive)
+                if (hero is Knight && hero.Weapon != null && hero.IsAlive)
                 {
-                    if (player is Knight knight)
-                    {
-                        knights.Add(knight);
-                    }
-                    else if (player is Barbarian barbarian)
-                    {
-                        barbarians.Add(barbarian);
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("Invalid hero type!");
-                    }
+                    knights.Add(hero as Knight);
+                }
+                else if (hero is Barbarian && hero.Weapon != null && hero.IsAlive)
+                {
+                    barbarians.Add(hero as Barbarian);
                 }
             }
 
-            var continueBattle = true;
 
-            while (continueBattle)
+            var startBattle = false;
+            while (knights.Any(x => x.IsAlive) && barbarians.Any(x => x.IsAlive))
             {
-                var allKnightsAreDead = true;
-                var allBarberiansAreDead = true;
-
-                var aliveKnights = 0;
-                var aliveBarberians = 0;
+                startBattle = true;
                 foreach (var knight in knights)
                 {
-                    if (knight.IsAlive)
+                    foreach (var barbarian in barbarians)
                     {
-                        allKnightsAreDead = false;
-                        aliveKnights++;
-                        foreach (var barbarian in barbarians.Where(b => b.IsAlive))
+                        if (knight.IsAlive && barbarian.IsAlive)
                         {
-                            var weopenDamage = knight.Weapon.DoDamage();
-
-                            barbarian.TakeDamage(weopenDamage);
+                            barbarian.TakeDamage(knight.Weapon.DoDamage());
                         }
                     }
                 }
 
                 foreach (var barbarian in barbarians)
                 {
-                    if (barbarian.IsAlive)
+                    foreach (var knight in knights)
                     {
-                        allBarberiansAreDead = false;
-                        aliveBarberians++;
-
-                        foreach (var knight in knights.Where(kn => kn.IsAlive))
+                        if (barbarian.IsAlive && knight.IsAlive)
                         {
-                            var weapenDamage = barbarian.Weapon.DoDamage();
-
-                            knight.TakeDamage(weapenDamage);
+                            knight.TakeDamage(barbarian.Weapon.DoDamage());
                         }
                     }
                 }
-
-                if (allBarberiansAreDead)
-                {
-                    var deathBarbarians = barbarians.Count - aliveBarberians;
-                    return $"The barbarians took {deathBarbarians} casualties but won the battle.";
-                }
-                else if (allKnightsAreDead)
-                {
-                    var deathKnights = knights.Count - aliveKnights;
-                    return $"The knights took {deathKnights} casualties but won the battle.";
-                }
             }
-            throw new InvalidOperationException("The fight logic has a bug"); 
+
+            if (startBattle)
+            {
+                if (knights.Any(x => x.IsAlive))
+                {
+                    return $"The knights took {knights.Where(x => !x.IsAlive).ToList().Count} casualties but won the battle.";
+                }
+                return $"The barbarians took {knights.Where(x => !x.IsAlive).ToList().Count} casualties but won the battle.";
+            }
+            return null;
         }
     }
 }

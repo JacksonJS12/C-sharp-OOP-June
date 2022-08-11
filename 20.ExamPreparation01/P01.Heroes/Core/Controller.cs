@@ -1,6 +1,5 @@
 ﻿using Heroes.Core.Contracts;
 using Heroes.Models.Contracts;
-using Heroes.Repositories.Contracts;
 using P01.Heroes.Models.Heroes;
 using P01.Heroes.Models.Map;
 using P01.Heroes.Models.Weapons;
@@ -10,116 +9,121 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace P01.Heroes.Core
+namespace Heroes.Core
 {
-    public class Controller : IController
+    internal class Controller : IController
     {
-        private readonly IRepository<IHero> heroes;
-        private readonly IRepository<IWeapon> weapens;
+        private HeroRepository heroes;
+        private WeaponRepository weapons;
 
         public Controller()
         {
-            this.heroes = new HeroRepository();
-            this.weapens = new WeaponRepository();
-            
+            heroes = new HeroRepository();
+            weapons = new WeaponRepository();
         }
-        public string CreateHero(string type, string name, int health, int armour)
-        {
-            if (this.heroes.FindByName(name) != null)
-            {
-                throw new InvalidOperationException($"The hero {name} already exists.");
-            }
-            //alternative variant of 3 if cases
-            IHero hero = type switch
-            {
-                nameof(Knight) => new Knight(name, health, armour),
-                nameof(Barbarian) => new Barbarian(name, health, armour),
-                _ => throw new InvalidOperationException("Invalid hero type.")
-            };
 
-            this.heroes.Add(hero);
-
-            var heroAlias = type == nameof(Knight)
-                ? $"Sir {hero.Name}"
-                : $"{nameof(Barbarian)} {hero.Name}";
-
-            return $"Successfully added {heroAlias} to the collection.";
-        }
-        public string CreateWeapon(string type, string name, int durability)
-        {
-            if (this.heroes.FindByName(name) != null)
-            {
-                throw new InvalidOperationException($"The weapon {name} already exists.");
-            }
-            IWeapon weapon = type switch
-            {
-                nameof(Mace) => new Mace(name, durability),
-                nameof(Claymore) => new Claymore(name, durability),
-                _ => throw new InvalidOperationException("Invalid weapon type.")
-            };
-
-            this.weapens.Add(weapon);
-
-            return $"A {type.ToLower()} {name} is added to the collection.";
-
-        }
         public string AddWeaponToHero(string weaponName, string heroName)
-        { 
-            var hero = this.heroes.FindByName(heroName);
-            var weapon = this.weapens.FindByName(weaponName);
-            if (hero == null)
+        {
+            IHero hero = heroes.FindByName(heroName);
+            IWeapon weapon = weapons.FindByName(weaponName);
+
+            if (hero.Weapon == null)
             {
-                throw new InvalidOperationException($"Hero {heroName} does not exist.");
+                var type = weapon.GetType().Name == "Claymore" ? "claymore" : "mace";
+                hero.AddWeapon(weapon);
+                weapons.Remove(weapon);
+                return $"Hero {heroName} can participate in battle using a {type}.";
             }
-            if (weapon == null)
-            {
-                throw new InvalidOperationException($"Weapon {weaponName} does not exist.");
-            }
-            if(hero.Weapon != null)
+            else
             {
                 throw new InvalidOperationException($"Hero {heroName} is well-armed.");
             }
-
-            hero.AddWeapon(weapon);
-
-            this.weapens.Remove(weapon);
-
-            var weaponType = weapon.GetType().Name;
-
-            return $"Hero {heroName} can participate in battle using a {weaponType.ToLower()}.";
-
         }
 
-        
-        public string StartBattle()
+        public string CreateHero(string type, string name, int health, int armour)
         {
-            var map = new Map();
+            IHero hero;
+            if (type == "Knight")
+            {
+                hero = new Knight(name, health, armour);
+            }
+            else if (type == "Barbarian")
+            {
+                hero = new Barbarian(name, health, armour);
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid hero type.");
+            }
 
-            var heroesReadyForBattle = this.heroes
-                .Models
-                .Where(h => h.IsAlive && h.Weapon != null)
-                .ToList();
+            if (heroes.Models.All(x => x.Name != name))
+            {
+                heroes.Add(hero);
 
-            return map.Fight(heroesReadyForBattle);
+                if (hero is Knight)
+                {
+                    return $"Successfully added Sir {name} to the collection.";
+                }
+                else
+                {
+                    return $"Successfully added Barbarian {name} to the collection.";
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException($"The hero {name} already exists.");
+            }
+
         }
 
+        public string CreateWeapon(string type, string name, int durability)
+        {
+            IWeapon weapon;
+            if (type == "Claymore")
+            {
+                weapon = new Claymore(name, durability);
+            }
+            else if (type == "Mace")
+            {
+                weapon = new Mace(name, durability);
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid weapon type.");
+            }
+
+            if (weapons.Models.All(x => x.Name != name))
+            {
+                weapons.Add(weapon);
+                var weaponType = weapon.GetType().Name == "Claymore" ? "claymore" : "mace";
+                return $"A {weaponType} {name} is added to the collection.";
+            }
+            else
+            {
+                throw new InvalidOperationException($"The weapon {name} already exists.");
+            }
+        }
 
         public string HeroReport()
         {
-            var result = new StringBuilder();
+            StringBuilder info = new StringBuilder();
 
-            var sprtedHeroes = this.heroes
-                .Models
-                .OrderBy(h => h.GetType().Name)
-                .ThenBy(h => h.Name);
-
-            foreach (var hero in sprtedHeroes)
+            foreach (var hero in heroes.Models.OrderBy(x => x.GetType().Name).ThenByDescending(x => x.Health).ThenBy(x => x.Name))
             {
-                result.AppendLine(hero.ToString());
+                info.AppendLine($"{hero.GetType().Name}: {hero.Name}");
+                info.AppendLine($"--Health: {hero.Health}");
+                info.AppendLine($"--Armour: {hero.Armour}");
+                info.AppendLine(hero.Weapon == null ? "--Weapon: Unarmed" : $"--Weapon: {hero.Weapon.Name}");
             }
 
-            return result.ToString().Trim();
+            return info.ToString().Trim();
         }
 
+        public string StartBattle()
+        {
+            IMap map = new Map();
+
+            return map.Fight(heroes.Models as ICollection<IHero>);
+        }
     }
 }

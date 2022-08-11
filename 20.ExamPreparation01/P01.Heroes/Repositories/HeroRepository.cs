@@ -2,28 +2,29 @@
 using Heroes.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace P01.Heroes.Repositories
 {
     public class HeroRepository : IRepository<IHero>
     {
-        private readonly Dictionary<string, IHero> heroes;
+        private readonly List<IHero> heroes;
         public HeroRepository()
         {
-            this.heroes = new Dictionary<string, IHero>();
+            this.heroes = new List<IHero>();
         }
         public IReadOnlyCollection<IHero> Models
-            => this.heroes.Values;
+            => this.heroes.AsReadOnly();
 
         public void Add(IHero model)
-             => this.heroes.Add(model.Name, model);
+             => this.heroes.Add(model);
 
         public bool Remove(IHero model)
         {
-            if (this.heroes.ContainsKey(model.Name))
+            if (this.heroes.Any(m => m.Name == model.Name))
             {
-                this.heroes.Remove(model.Name);
+                this.heroes.Remove(model);
 
                 return true;
             }
@@ -31,11 +32,7 @@ namespace P01.Heroes.Repositories
         }
         public IHero FindByName(string name)
         {
-            if (this.heroes.ContainsKey(name))
-            {
-                return this.heroes[name];
-            }
-            return null;
+            return this.heroes.FirstOrDefault(h => h.Name == name);
         }
     }
 }

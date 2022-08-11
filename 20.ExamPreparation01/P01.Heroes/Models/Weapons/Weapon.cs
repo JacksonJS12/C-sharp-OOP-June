@@ -9,13 +9,11 @@ namespace P01.Heroes.Models.Weapons
     {
         private string name;
         private int durability;
-        private int damage;
 
-        protected Weapon(string name, int durability, int damage)
+        protected Weapon(string name, int durability)
         {
             this.Name = name;
             this.Durability = durability;
-            this.Damage = damage;
         }
 
         public string Name
@@ -37,7 +35,7 @@ namespace P01.Heroes.Models.Weapons
         public int Durability
         {
             get => this.durability;
-            private set
+             set
             {
                 if (value < 0)
                 {
@@ -46,31 +44,8 @@ namespace P01.Heroes.Models.Weapons
                 this.durability = value;
             }
         }
-        private int Damage
-        {
-            get => this.damage;
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Damage cannot be below 0.");
-                }
-                this.damage = value;
 
-            }
-        }
-
-        public int DoDamage()
-        {
-            if (this.Durability == 0)
-            {
-                return 0;
-            }
-
-            this.Durability--;
-
-            return this.Damage;
-        }
+        public abstract int DoDamage();
 
     }
 }
