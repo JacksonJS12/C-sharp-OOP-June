@@ -101,5 +101,14 @@ namespace P01.Heroes.Models.Heroes
             }
 
         }
+        public override string ToString()
+        {
+            var result = new StringBuilder();
+
+            result.AppendLine($"{this.GetType().Name}: {this.Name}");
+            result.AppendLine("--Health: { hero health }");
+            result.AppendLine("--Armour: { hero armour }");
+            result.AppendLine("--Weapon: { weapon name }/Unarmed");
+        }}
     }
 }

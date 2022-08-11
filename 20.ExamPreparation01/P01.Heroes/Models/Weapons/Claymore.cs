@@ -8,7 +8,7 @@ namespace P01.Heroes.Models.Weapons
     public class Claymore : Weapon
     {
         private const int Damage = 20;
-        public Claymore(string name, int durability, int damage) 
+        public Claymore(string name, int durability) 
             : base(name, durability, Damage)
         {
         }

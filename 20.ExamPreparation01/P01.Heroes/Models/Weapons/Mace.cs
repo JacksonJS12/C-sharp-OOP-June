@@ -7,7 +7,7 @@ namespace P01.Heroes.Models.Weapons
     public class Mace : Weapon
     {
         private const int Damage = 25; 
-        public Mace(string name, int durability, int damage) 
+        public Mace(string name, int durability) 
             : base(name, durability, Damage)
         {
         }

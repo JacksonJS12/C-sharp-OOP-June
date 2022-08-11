@@ -4,6 +4,7 @@
     using Heroes.IO;
     using Heroes.IO.Contracts;
     using Heroes.Core.Contracts;
+    using P01.Heroes.Core;
 
     public class Engine : IEngine
     {
@@ -15,7 +16,7 @@
         {
             this.writer = new Writer();
             this.reader = new Reader();
-            // this.controller = new Controller();
+            this.controller = new Controller();
         }
 
         public void Run()
