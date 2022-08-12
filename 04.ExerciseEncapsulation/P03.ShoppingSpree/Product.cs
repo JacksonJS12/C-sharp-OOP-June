@@ -2,33 +2,48 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace P03.ShoppingSpree
+namespace ShoppingSpree
 {
     public class Product
     {
         private string name;
+        private double cost;
 
-        public Product(string name, decimal cost)
+        public Product(string name, double cost)
         {
-            this.Name = name;
-            this.Cost = cost;
+            Name = name;
+            Cost = cost;
         }
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return name; }
             private set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Name cannot be empty");
                 }
-                this.name = value;
+                name = value;
             }
         }
-        public decimal Cost { get; private set; }
+
+        public double Cost
+        {
+            get { return cost; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Money cannot be negative");
+                }
+                cost = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"{this.Name}";
+        }
     }
 }
