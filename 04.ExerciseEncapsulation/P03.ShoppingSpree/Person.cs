@@ -2,69 +2,76 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace P03.ShoppingSpree
+namespace ShoppingSpree
 {
     public class Person
     {
-        private readonly List<Product> bagOfProducts;
         private string name;
-        private decimal money;
+        private double money;
+        private List<Product> bagOfProducts;
 
-        public Person(string name, decimal money)
+        public Person(string name, double money)
         {
             this.bagOfProducts = new List<Product>();
-            this.Name = name;
-            this.Money = money;
+            Name = name;
+            Money = money;
+        }
+
+        public IReadOnlyCollection<Product> BagOfProducts 
+        { 
+            get { return bagOfProducts; } 
         }
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return name; }
             private set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Name cannot be empty");
                 }
-                this.name = value;
+                name = value;
             }
         }
-        public decimal Money
+
+        public double Money
         {
-            get
-            {
-                return this.money;
-            }
-            private set
+            get { return money; }
+            set
             {
                 if (value < 0)
                 {
                     throw new ArgumentException("Money cannot be negative");
                 }
-                this.money = value;
+                money = value;
             }
         }
-        public void AddProductToTheBag(Product product)
+
+        public void BuyProduct(Product product)
         {
-            if (!CanIBuyThis(product))
+            if (this.money >= product.Cost)
+            {
+                this.money -= product.Cost;
+                bagOfProducts.Add(product);
+                Console.WriteLine($"{this.Name} bought {product.Name}");
+            }
+            else
             {
                 throw new ArgumentException($"{this.Name} can't afford {product.Name}");
             }
-            this.Money -= product.Cost;
-            this.bagOfProducts.Add(product);
-            Console.WriteLine($"{this.Name} bought {product.Name}");
         }
 
-        private bool CanIBuyThis(Product product)
+        public override string ToString()
         {
-            if (this.Money - product.Cost > this.Money)
+            if (BagOfProducts.Count == 0)
             {
-                return true;
+                return $"{this.Name} - Nothing bought";
             }
-            return false;
+            else
+            {
+                return $"{this.Name} - {string.Join(", ", bagOfProducts)}";
+            }
         }
     }
 }
