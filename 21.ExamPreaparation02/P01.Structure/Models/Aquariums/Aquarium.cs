@@ -58,7 +58,7 @@ namespace AquaShop.Models.Aquariums
             {
                 throw new InvalidOperationException(ExceptionMessages.NotEnoughCapacity);
             }
-            this.Fish.Add(fish);
+            this.fish.Add(fish);
         }
 
         public bool RemoveFish(IFish fish)
@@ -84,7 +84,7 @@ namespace AquaShop.Models.Aquariums
                 .AppendLine($"{this.Name} ({this.GetType().Name}):")
                 .AppendLine($"Fish: {fishOutput}")
                 .AppendLine($"Decorations: {this.Decorations.Count}")
-                .AppendLine($"Comfort: {this.Comfort}");
+                .Append($"Comfort: {this.Comfort}");
 
             return sb.ToString();
         }
