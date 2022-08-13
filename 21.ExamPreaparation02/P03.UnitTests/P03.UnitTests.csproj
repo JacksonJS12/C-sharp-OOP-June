@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="LectureSolution\FishTest.cs" />
+    <Compile Remove="LectureSolution\**" />
+    <EmbeddedResource Remove="LectureSolution\**" />
+    <None Remove="LectureSolution\**" />
   </ItemGroup>
 
   <ItemGroup>
