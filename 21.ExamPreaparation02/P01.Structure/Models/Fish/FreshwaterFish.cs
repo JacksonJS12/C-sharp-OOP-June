@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace P01.Structure.Models.Fish
+namespace AquaShop.Models.Fish
 {
     public class FreshwaterFish : Fish
     {

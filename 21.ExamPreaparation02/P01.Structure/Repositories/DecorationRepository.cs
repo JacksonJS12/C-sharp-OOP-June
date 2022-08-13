@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace P01.Structure.Repositories
+namespace AquaShop.Repositories
 {
     public class DecorationRepository : IRepository<IDecoration>
     {
-        private readonly ICollection<IDecoration> models;
+        private readonly HashSet<IDecoration> models;
 
         public DecorationRepository()
         {
@@ -16,7 +16,7 @@ namespace P01.Structure.Repositories
         }
 
         public IReadOnlyCollection<IDecoration> Models
-             => (IReadOnlyCollection<IDecoration>)this.models;
+             => this.models;
 
         public void Add(IDecoration model)
             => this.models.Add(model);

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace P01.Structure.Models.Decorations
+namespace AquaShop.Models.Decorations
 {
     public abstract class Decoration : IDecoration
     {

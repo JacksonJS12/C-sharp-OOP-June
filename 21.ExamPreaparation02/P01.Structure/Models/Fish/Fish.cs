@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace P01.Structure.Models.Fish
+namespace AquaShop.Models.Fish
 {
     public abstract class Fish : IFish
     {
@@ -61,7 +61,7 @@ namespace P01.Structure.Models.Fish
             }
             private set
             {
-                if (value < 0)
+                if (value <= 0)
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidFishPrice);
                 }

@@ -7,20 +7,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace P01.Structure.Models.Aquariums
+namespace AquaShop.Models.Aquariums
 {
     public abstract class Aquarium : IAquarium
     {
         private string name;
-        private int comfort;
+        private ICollection<IDecoration> decorations;
+        private ICollection<IFish> fish;
 
         protected Aquarium(string name, int capacity)
         {
             this.Name = name;
             this.Capacity = capacity;
-
-            this.Decorations = new HashSet<IDecoration>();
-            this.Fish = new HashSet<IFish>();
+            this.decorations = new HashSet<IDecoration>();
+            this.fish = new HashSet<IFish>();
         }
 
         public string Name
@@ -35,44 +35,38 @@ namespace P01.Structure.Models.Aquariums
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidAquariumName);
                 }
+                this.name = value;
             }
         }
 
-        public int Capacity { get; private set; }
+        public int Capacity { get; }
 
         public int Comfort
-        {
-            get
-            {
-                return this.comfort;
-            }
-            private set
-            {
-                this.comfort = this.Decorations.Sum(d => d.Comfort);
-            }
-        }
+          => this.decorations.Sum(d => d.Comfort);
 
-        public ICollection<IDecoration> Decorations { get; private set; }
+        public ICollection<IDecoration> Decorations
+            => this.decorations;
 
-        public ICollection<IFish> Fish { get; private set; }
-
+        public ICollection<IFish> Fish
+            => this.fish;
         public void AddDecoration(IDecoration decoration)
             => this.Decorations.Add(decoration);
 
         public void AddFish(IFish fish)
         {
-            if (this.Capacity < this.Fish.Count + 1)
+            if (this.Capacity == this.Fish.Count)
             {
                 throw new InvalidOperationException(ExceptionMessages.NotEnoughCapacity);
             }
             this.Fish.Add(fish);
         }
+
         public bool RemoveFish(IFish fish)
             => this.Fish.Remove(fish);
 
         public void Feed()
         {
-            foreach (var fish in this.Fish)
+            foreach (IFish fish in this.Fish)
             {
                 fish.Eat();
             }

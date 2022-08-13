@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace P01.Structure.Models.Decorations
+namespace AquaShop.Models.Decorations
 {
     public class Ornament : Decoration
     {
-        private const int CONFORT = 1;
-        private const decimal PRICE = 5;
+        private const int Confort = 1;
+        private const decimal Price = 5;
         public Ornament() 
-            : base(CONFORT, PRICE)
+            : base(Confort, Price)
         {
         }
     }
