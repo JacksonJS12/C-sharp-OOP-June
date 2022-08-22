@@ -8,6 +8,8 @@
     {
         [Test]
         [TestCase(1, 30)]
+        [TestCase(20, 40)]
+        [TestCase(100, 200)]
         public void ConstructorShouldWokrsCorrectly(int bookingNumber, int residenceDuration)
         {
             Room room = new Room(10, 10);

@@ -10,6 +10,7 @@ using BookingApp.Models.Rooms.Contracts;
 using BookingApp.Models.Rooms;
 using BookingApp.Models.Bookings.Contracts;
 using BookingApp.Models.Bookings;
+using BookingApp.Models.Hotels;
 
 namespace BookingApp.Core
 {
@@ -67,6 +68,10 @@ namespace BookingApp.Core
             {
               return (OutputMessages.HotelNameInvalid, hotelName).ToString();
             }
+            string output = this.bookings.All().Count > 0 ?
+                            string.Join(Environment.NewLine, this.bookings.All().Select(x => x.BookingSummary()))
+                            : "none";
+
 
         }
 
