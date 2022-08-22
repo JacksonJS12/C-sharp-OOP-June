@@ -32,7 +32,6 @@ namespace BookingApp.Models.Rooms
                 this.pricePerNight = value;
             }
         }
-
         public void SetPrice(double price)
         {
             this.PricePerNight = price;

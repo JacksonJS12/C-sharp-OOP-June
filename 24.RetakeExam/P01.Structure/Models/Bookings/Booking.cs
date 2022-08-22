@@ -63,7 +63,7 @@ namespace BookingApp.Models.Bookings
             }
         }
 
-        public int BookingNumber { get; private set; }
+        public int BookingNumber { get; set; }
 
         public string BookingSummary()
         {
