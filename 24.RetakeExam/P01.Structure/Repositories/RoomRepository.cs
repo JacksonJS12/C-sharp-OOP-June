@@ -1,4 +1,5 @@
-﻿using BookingApp.Models.Rooms.Contracts;
+﻿using BookingApp.Models.Rooms;
+using BookingApp.Models.Rooms.Contracts;
 using BookingApp.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,34 @@ namespace BookingApp.Repositories
 {
     public class RoomRepository : IRepository<IRoom>
     {
-        public void AddNew(IRoom model)
+        private readonly ICollection<IRoom> all;
+        public RoomRepository()
         {
-            throw new NotImplementedException();
+            this.all = new List<IRoom>();
         }
+        public void AddNew(IRoom model)
+            => this.all.Add(model);
 
         public IReadOnlyCollection<IRoom> All()
-        {
-            throw new NotImplementedException();
-        }
+          => (IReadOnlyCollection<IRoom>)this.all;
 
         public IRoom Select(string criteria)
         {
-            throw new NotImplementedException();
+            IRoom room;
+            if (criteria == "Apartment")
+            {
+                room = new Apartment();
+            }
+            else if (criteria == "DoubleBed")
+            {
+                room = new DoubleBed();
+            }
+            else if (criteria == "Studio")
+            {
+                room = new Studio();
+            }
+            room = null;
+            return room;
         }
     }
 }

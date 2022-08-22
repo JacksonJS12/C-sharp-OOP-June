@@ -68,15 +68,18 @@ namespace BookingApp.Models.Bookings
         public string BookingSummary()
         {
             var sb = new StringBuilder();
-
-            double totalPaid = Math.Round(this.ResidenceDuration * this.Room.PricePerNight, 2);
             sb
                 .AppendLine($"Booking number: {this.BookingNumber}")
                 .AppendLine($"Room type: {this.Room.GetType().Name}")
                 .AppendLine($"Adults: {this.AdultsCount} Children: {this.ChildrenCount}")
-                .Append($"Total amount paid: {totalPaid:F2} $");
+                .Append($"Total amount paid: {TotalPaid():F2} $");
 
             return sb.ToString().Trim();
+        }
+
+        private double TotalPaid()
+        {
+           return Math.Round(this.ResidenceDuration * this.Room.PricePerNight, 2);
         }
     }
 }

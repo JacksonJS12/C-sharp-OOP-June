@@ -2,25 +2,25 @@
 using BookingApp.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BookingApp.Repositories
 {
     public class BookingRepository : IRepository<IBooking>
     {
-        public void AddNew(IBooking model)
+        private readonly ICollection<IBooking> all;
+        public BookingRepository()
         {
-            throw new NotImplementedException();
+            this.all = new List<IBooking>();
         }
+        public void AddNew(IBooking model)
+          => this.all.Add(model);
 
         public IReadOnlyCollection<IBooking> All()
-        {
-            throw new NotImplementedException();
-        }
+        => (IReadOnlyCollection<IBooking>)this.all;
 
         public IBooking Select(string criteria)
-        {
-            throw new NotImplementedException();
-        }
+           => this.all.FirstOrDefault(x => x.BookingNumber.ToString() == criteria);
     }
 }

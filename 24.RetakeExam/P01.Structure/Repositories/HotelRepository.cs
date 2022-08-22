@@ -2,25 +2,25 @@
 using BookingApp.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BookingApp.Repositories
 {
     public class HotelRepository : IRepository<IHotel>
     {
-        public void AddNew(IHotel model)
+        private readonly ICollection<IHotel> all;
+        public HotelRepository()
         {
-            throw new NotImplementedException();
+            this.all = new List<IHotel>();
         }
+        public void AddNew(IHotel model)
+         => this.all.Add(model);
 
         public IReadOnlyCollection<IHotel> All()
-        {
-            throw new NotImplementedException();
-        }
+             => (IReadOnlyCollection<IHotel>)this.all;
 
         public IHotel Select(string criteria)
-        {
-            throw new NotImplementedException();
-        }
+            => this.all.FirstOrDefault(x => x.FullName == criteria);
     }
 }

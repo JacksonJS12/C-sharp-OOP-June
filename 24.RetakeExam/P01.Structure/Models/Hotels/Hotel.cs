@@ -1,22 +1,63 @@
 ﻿using BookingApp.Models.Bookings.Contracts;
 using BookingApp.Models.Hotels.Contacts;
 using BookingApp.Models.Rooms.Contracts;
+using BookingApp.Repositories;
 using BookingApp.Repositories.Contracts;
+using BookingApp.Utilities.Messages;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BookingApp.Models.Hotels
 {
-    internal class Hotel : IHotel
+    public class Hotel : IHotel
     {
-        public string FullName => throw new NotImplementedException();
+        private string fullName;
+        private int category;
 
-        public int Category => throw new NotImplementedException();
+        public Hotel(string fullName, int category)
+            :this()
+        {
+            this.FullName = fullName;
+            this.Category = category;
+        }
 
-        public double Turnover => throw new NotImplementedException();
+        private Hotel()
+        {
+            this.Rooms = new RoomRepository();
+            this.Bookings = new BookingRepository();
+        }
+        public string FullName 
+        {
+            get => this.fullName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException(ExceptionMessages.HotelNameNullOrEmpty);
+                }
+                this.fullName = value;
+            }
+        }
 
-        public IRepository<IRoom> Rooms { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IRepository<IBooking> Bookings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Category
+        {
+            get => this.category;
+            set
+            {
+                if (value < 1 && value > 5)
+                {
+                    throw new ArgumentException(ExceptionMessages.InvalidCategory);
+                }
+                this.category = value;
+            }
+        }
+        public double Turnover
+            => this.Bookings.All().Sum(x => Math.Round(x.ResidenceDuration * x.Room.PricePerNight, 2));
+
+        public IRepository<IRoom> Rooms { get; set; }
+        public IRepository<IBooking> Bookings { get; set; }
+
     }
 }
