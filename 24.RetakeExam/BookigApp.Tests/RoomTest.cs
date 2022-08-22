@@ -1,9 +1,8 @@
-using FrontDeskApp;
-using NUnit.Framework;
-using System;
-
 namespace BookigApp.Tests
 {
+    using FrontDeskApp;
+    using NUnit.Framework;
+    using System;
     [TestFixture]
     public class RoomTests
     {
