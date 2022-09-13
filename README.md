@@ -1,4 +1,4 @@
-# C-sharp-OOP-June-solutions
+# C# OOP June solutions
 C# OOP June-August 2022
 
 [Software University course](https://softuni.bg/trainings/3700/csharp-oop-june-2022) - Exercises and Solutions
