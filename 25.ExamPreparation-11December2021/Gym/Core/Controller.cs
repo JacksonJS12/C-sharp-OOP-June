@@ -1,6 +1,7 @@
 ﻿using Gym.Core.Contracts;
 using Gym.Models.Athletes;
 using Gym.Models.Equipment;
+using Gym.Models.Equipment.Contracts;
 using Gym.Models.Gyms;
 using Gym.Repositories;
 using Gym.Utilities.Messages;
@@ -32,6 +33,7 @@ namespace Gym.Core
                 {
                     isAdded = true;
                     Boxer boxer = new Boxer(athleteName, motivation, numberOfMedals);
+                    gym.AddAthlete(boxer);
                 }
             }
             else if (athleteType == "Weightlifter")
@@ -40,6 +42,7 @@ namespace Gym.Core
                 {
                     isAdded = true;
                     Weighlifter weighlifter = new Weighlifter(athleteName, motivation, numberOfMedals);
+                    gym.AddAthlete(weighlifter);
                 }
             }
             else
@@ -93,12 +96,14 @@ namespace Gym.Core
 
         public string EquipmentWeight(string gymName)
         {
-            throw new NotImplementedException();
+            var gym = this.gyms.FirstOrDefault(g => g.Name == gymName);
+
+            return string.Format(OutputMessages.EquipmentTotalWeight, gymName, gym.EquipmentWeight);
         }
 
         public string InsertEquipment(string gymName, string equipmentType)
         {
-            Equipment equipment = this.equipmentRepository.FindByType(equipmentType);
+            IEquipment equipment = this.equipmentRepository.FindByType(equipmentType);
             if (equipment == null)
             {
                 throw new InvalidOperationException(string.Format(ExceptionMessages.InexistentEquipment, equipmentType));
@@ -113,12 +118,23 @@ namespace Gym.Core
 
         public string Report()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var gym in this.gyms)
+            {
+                sb.AppendLine(gym.GymInfo());
+            }
+
+            return sb.ToString().TrimEnd();
         }
 
         public string TrainAthletes(string gymName)
         {
-            throw new NotImplementedException();
+            var gym = this.gyms.FirstOrDefault(g => g.Name == gymName);
+
+            gym.Exercise();
+
+            return string.Format(OutputMessages.AthleteExercise, gym.Athletes.Count());
         }
     }
 }

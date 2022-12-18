@@ -33,7 +33,7 @@ namespace Gym.Models.Athletes
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidAthleteName);
                 }
-                this.fullName= value;
+                this.fullName = value;
             }
         }
 
