@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P03.PlanetWars", "PlanetWars\P03.PlanetWars.csproj", "{05C48B23-6B2C-42C4-ACA8-60BE17EFBEE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P03.PlanetWars.Tests", "PlanetWars.Tests\P03.PlanetWars.Tests.csproj", "{4B8A78F7-FEA1-4EDA-8A58-F761C3DC202A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetWars", "PlanetWars\PlanetWars.csproj", "{88D7AEC3-A5D1-416B-9CA5-0506F6D4E758}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05C48B23-6B2C-42C4-ACA8-60BE17EFBEE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C48B23-6B2C-42C4-ACA8-60BE17EFBEE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C48B23-6B2C-42C4-ACA8-60BE17EFBEE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C48B23-6B2C-42C4-ACA8-60BE17EFBEE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B8A78F7-FEA1-4EDA-8A58-F761C3DC202A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B8A78F7-FEA1-4EDA-8A58-F761C3DC202A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B8A78F7-FEA1-4EDA-8A58-F761C3DC202A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B8A78F7-FEA1-4EDA-8A58-F761C3DC202A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D7AEC3-A5D1-416B-9CA5-0506F6D4E758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D7AEC3-A5D1-416B-9CA5-0506F6D4E758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D7AEC3-A5D1-416B-9CA5-0506F6D4E758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D7AEC3-A5D1-416B-9CA5-0506F6D4E758}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7EFBCB1-F233-4CEA-B176-A110980FC97D}
+	EndGlobalSection
+EndGlobal
