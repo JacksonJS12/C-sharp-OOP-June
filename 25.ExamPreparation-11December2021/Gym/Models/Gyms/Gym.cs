@@ -52,9 +52,9 @@ namespace Gym.Models.Gyms
             }
         }
 
-        public ICollection<IEquipment> Equipment { get; private set; }
+        public ICollection<IEquipment> Equipment { get;     }
 
-        public ICollection<IAthlete> Athletes { get; private set; }
+        public ICollection<IAthlete> Athletes { get; }
 
         public void AddAthlete(IAthlete athlete)
         {
