@@ -9,6 +9,7 @@ namespace UniversityCompetition.Models
     public abstract class Subject : ISubject
     {
         private string name;
+        private int id;
 
         protected Subject(int id, string name, double rate)
         {
@@ -17,20 +18,31 @@ namespace UniversityCompetition.Models
             this.Rate = rate;
         }
 
-        public int Id { get; private set; } //add repo logic later
+        public int Id
+        {
+            get
+            {
+                return this.id;
+            }
+            private set
+            {
+                this.id += value;
+            }
+        }
+
         public string Name
         {
             get
             {
                 return this.name;
             }
-            private set 
+            private set
             {
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException(ExceptionMessages.NameNullOrWhitespace);
                 }
-                this.name = value; 
+                this.name = value;
             }
         }
 

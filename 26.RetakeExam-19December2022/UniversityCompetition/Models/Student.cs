@@ -10,6 +10,7 @@ namespace UniversityCompetition.Models
     {
         private string firstName;
         private string lastName;
+        private int id;
         private IList<int> coveredExams;
         private IUniversity university;
 
@@ -23,7 +24,17 @@ namespace UniversityCompetition.Models
             this.university = new University();
         }
 
-        public int Id { get; private set; } //add repo logic later
+        public int Id
+        {
+            get
+            {
+                return this.id;
+            }
+            private set
+            {
+                this.id += value;
+            }
+        }
 
         public string FirstName
         {

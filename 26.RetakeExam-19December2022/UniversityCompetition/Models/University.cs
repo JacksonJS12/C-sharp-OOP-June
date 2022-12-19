@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using System.Text;
 using UniversityCompetition.Models.Contracts;
@@ -12,9 +13,10 @@ namespace UniversityCompetition.Models
         private string name;
         private string category;
         private int capacity;
+        private int id;
         private IReadOnlyCollection<int> requiredSubjects;
 
-        public University(IReadOnlyCollection<int> requiredSubjects, int id, string name, string category, int capacity)
+        public University(int id, string name, string category, int capacity, IReadOnlyCollection<int> requiredSubjects)
         :this()
         {
             this.requiredSubjects = requiredSubjects;
@@ -28,7 +30,17 @@ namespace UniversityCompetition.Models
 
         }
 
-        public int Id { get; private set; }//return later
+        public int Id
+        {
+            get
+            {
+                return this.id;
+            }
+            private set
+            {
+                this.id += value;
+            }
+        } 
 
         public string Name
         {
@@ -52,21 +64,9 @@ namespace UniversityCompetition.Models
             {
                 return this.category;
             }
-            set
+           private set
             {
-                if (value == "Technical")
-                {
-
-                }
-                else if (value == "Economical")
-                {
-
-                }
-                else if (value == "Humanity")
-                {
-
-                }
-                else 
+                if(value != "Technical" && value != "Economical" && value != "Humanity") 
                 {
                     throw new ArgumentException(string.Format(ExceptionMessages.CategoryNotAllowed, value));
                 }
@@ -80,7 +80,7 @@ namespace UniversityCompetition.Models
             {
                 return this.capacity;
             }
-            set
+            private set
             {
                 if (value < 0)
                 {
@@ -90,7 +90,8 @@ namespace UniversityCompetition.Models
             }
         }
 
-        public IReadOnlyCollection<int> RequiredSubjects => throw new NotImplementedException();
+        public IReadOnlyCollection<int> RequiredSubjects 
+            => this.requiredSubjects;
 
         
     }
