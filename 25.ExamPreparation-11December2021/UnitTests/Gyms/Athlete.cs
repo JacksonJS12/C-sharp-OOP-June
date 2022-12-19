@@ -1,11 +1,11 @@
-﻿namespace UnitTesting.Gyms
+﻿namespace Gyms
 {
     public class Athlete
     {
         public Athlete(string fullName)
         {
-            FullName = fullName;
-            IsInjured = false;
+            this.FullName = fullName;
+            this.IsInjured = false;
         }
 
         public string FullName { get; set; }

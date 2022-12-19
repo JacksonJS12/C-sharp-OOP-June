@@ -1,4 +1,4 @@
-﻿namespace UnitTesting.Gyms.Tests
+﻿namespace Gyms.Tests
 {
     public class GymsTests
     {

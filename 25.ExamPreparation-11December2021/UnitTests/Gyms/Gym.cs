@@ -1,4 +1,4 @@
-﻿namespace UnitTesting.Gyms
+﻿namespace Gyms
 {
     using System;
     using System.Collections.Generic;
@@ -12,16 +12,16 @@
 
         public Gym(string name, int size)
         {
-            Name = name;
-            Capacity = size;
-            athletes = new List<Athlete>();
+            this.Name = name;
+            this.Capacity = size;
+            this.athletes = new List<Athlete>();
         }
 
         public string Name
         {
             get
             {
-                return name;
+                return this.name;
             }
 
             private set
@@ -31,7 +31,7 @@
                     throw new ArgumentNullException(nameof(value), "Invalid gym name.");
                 }
 
-                name = value;
+                this.name = value;
             }
         }
 
@@ -39,7 +39,7 @@
         {
             get
             {
-                return size;
+                return this.size;
             }
 
             private set
@@ -49,37 +49,37 @@
                     throw new ArgumentException("Invalid gym capacity.");
                 }
 
-                size = value;
+                this.size = value;
             }
         }
 
-        public int Count => athletes.Count;
+        public int Count => this.athletes.Count;
 
         public void AddAthlete(Athlete athlete)
         {
-            if (athletes.Count == size)
+            if (this.athletes.Count == this.size)
             {
                 throw new InvalidOperationException("The gym is full.");
             }
 
-            athletes.Add(athlete);
+            this.athletes.Add(athlete);
         }
 
         public void RemoveAthlete(string fullName)
         {
-            Athlete athleteToRemove = athletes.FirstOrDefault(x => x.FullName == fullName);
+            Athlete athleteToRemove = this.athletes.FirstOrDefault(x => x.FullName == fullName);
 
             if (athleteToRemove == null)
             {
                 throw new InvalidOperationException($"The athlete {fullName} doesn't exist.");
             }
 
-            athletes.Remove(athleteToRemove);
+            this.athletes.Remove(athleteToRemove);
         }
 
         public Athlete InjureAthlete(string fullName)
         {
-            Athlete requestedAthlete = athletes.FirstOrDefault(x => x.FullName == fullName);
+            Athlete requestedAthlete = this.athletes.FirstOrDefault(x => x.FullName == fullName);
 
             if (requestedAthlete == null)
             {
@@ -93,8 +93,8 @@
 
         public string Report()
         {
-            string athleteNames = string.Join(", ", athletes.Where(x => !x.IsInjured).Select(f => f.FullName));
-            string report = $"Active athletes at {Name}: {athleteNames}";
+            string athleteNames = string.Join(", ", this.athletes.Where(x => !x.IsInjured).Select(f => f.FullName));
+            string report = $"Active athletes at {this.Name}: {athleteNames}";
 
             return report;
         }

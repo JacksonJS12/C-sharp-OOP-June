@@ -1,4 +1,4 @@
-﻿namespace UnitTesting.Gyms
+﻿namespace Gyms
 {
     using System;
 
