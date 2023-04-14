@@ -22,7 +22,7 @@ namespace WarCroft
 
             //var engine = new Engine(reader, sbWriter);
             //engine.Run();
-
+             
             //Console.WriteLine(sbWriter.sb.ToString().Trim());
         }
 	}
