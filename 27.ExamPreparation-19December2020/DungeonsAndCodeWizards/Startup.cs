@@ -12,7 +12,7 @@ namespace WarCroft
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter();
 
-            var engine = new Engine(reader, writer);
+            var engine = new Engine(reader, writer);  
             engine.Run();
 
                 /* Use the below configuration instead of the usual one if you wish to print all output messages together after the inputs for easier comparison with the example output. */
